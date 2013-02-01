@@ -10,4 +10,5 @@ triarry's github: https://github.com/triarry/PvPRestore
 Permissions:
 
 pvprestore.info: Allows players to type /pvprestore
+
 pvprestore.keep: Allows players to gain full access to the mod and keep their xp and inventory on death
