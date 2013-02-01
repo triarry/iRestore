@@ -1,0 +1,7 @@
+name: PvPRestore
+main: com.github.triarry.PvPRestore.PvPRestore
+version: 1.0
+commands:
+   pvprestore:
+      description: Tells the player information about this plugin
+      usage: /<command>
