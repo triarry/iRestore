@@ -18,7 +18,7 @@ public class PvPRestoreCommandExecutor implements CommandExecutor {
 		if (label.equalsIgnoreCase("pvprestore")) {
 			if (sender.hasPermission("pvprestore.info")) {
 				sender.sendMessage(ChatColor.LIGHT_PURPLE + "#####");
-				sender.sendMessage(ChatColor.GREEN + "Currently running PvP Restore version 1.1");
+				sender.sendMessage(ChatColor.GREEN + "Currently running PvP Restore version 1.2");
 				sender.sendMessage(ChatColor.GREEN + "Plugin made by triarry");
 				sender.sendMessage(ChatColor.LIGHT_PURPLE + "#####");
 				System.out.println("[PvP Restore] A player requested information and was granted access.");
