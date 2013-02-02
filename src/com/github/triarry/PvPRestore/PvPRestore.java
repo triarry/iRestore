@@ -27,6 +27,13 @@ public class PvPRestore extends JavaPlugin {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
+	    try {
+	        Metrics metrics = new Metrics(this);
+	        metrics.start();
+	        System.out.println("[PvP Restore] Now tracking stats!");
+	    } catch (IOException e) {
+	        // Failed to submit the stats :-(
+	    }
 	    config = new YamlConfiguration();
 	    loadYamls();
 	    getCommand("pvprestore").setExecutor(new PvPRestoreCommandExecutor(this));
