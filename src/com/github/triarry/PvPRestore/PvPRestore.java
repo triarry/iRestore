@@ -65,6 +65,7 @@ public class PvPRestore extends JavaPlugin {
 	public void loadYamls() {
 	    try {
 	        config.load(configFile);
+	        System.out.println("[PvP Restore] Succesfully loaded config.yml");
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
