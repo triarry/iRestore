@@ -1,6 +1,6 @@
 name: PvP Restore
 main: com.github.triarry.PvPRestore.PvPRestore
-version: 1.2
+version: 1.1.1
 commands:
    pvprestore:
       description: Tells the player information about this plugin
