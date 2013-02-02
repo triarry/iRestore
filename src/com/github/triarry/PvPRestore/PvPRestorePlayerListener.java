@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -47,8 +49,6 @@ public class PvPRestorePlayerListener implements Listener {
 			} else {
 				player.sendMessage(ChatColor.RED + "Your death was not player related, so your inventory and XP have dropped where you died.");
 			}
-		} else {
-			// do nothing
 		}
 	}
 	
@@ -64,5 +64,31 @@ public class PvPRestorePlayerListener implements Listener {
             armor.remove(event.getPlayer());
         }
 	}
-
+	@EventHandler
+	public void onPlayerQuit(PlayerQuitEvent event) {
+		if (event.getPlayer().isDead()) {
+	        if(items.containsKey(event.getPlayer())){
+	            event.getPlayer().getInventory().clear();
+	            event.getPlayer().getInventory().setContents(items.get(event.getPlayer()));
+	            items.remove(event.getPlayer());
+	        }
+	        if(armor.containsKey(event.getPlayer()) && armor.size() != 0) {
+	            event.getPlayer().getInventory().setArmorContents(armor.get(event.getPlayer()));
+	            armor.remove(event.getPlayer());
+	        }
+		}
+	}
+	public void onPlayerKick(PlayerKickEvent event) {
+		if (event.getPlayer().isDead()) {
+	        if(items.containsKey(event.getPlayer())){
+	            event.getPlayer().getInventory().clear();
+	            event.getPlayer().getInventory().setContents(items.get(event.getPlayer()));
+	            items.remove(event.getPlayer());
+	        }
+	        if(armor.containsKey(event.getPlayer()) && armor.size() != 0) {
+	            event.getPlayer().getInventory().setArmorContents(armor.get(event.getPlayer()));
+	            armor.remove(event.getPlayer());
+	        }
+		}
+	}
 }

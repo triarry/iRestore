@@ -33,7 +33,6 @@ public class PvPRestore extends JavaPlugin {
 	}
 	@Override
 	public void onDisable() {
-		saveYamls();
 	}
 	private void firstRun() throws Exception {
 	    if(!configFile.exists()){
