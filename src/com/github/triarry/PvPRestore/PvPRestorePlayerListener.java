@@ -33,7 +33,7 @@ public class PvPRestorePlayerListener implements Listener {
 
 		Player killer = player.getKiller();
 		if (killer != null) {
-			if (player.hasPermission("pvprestore.keep")) {
+			if (player.hasPermission("pvprestore.keep") && plugin.getConfig().getBoolean("keep-inventory") == true && plugin.getConfig().getBoolean("keep-xp") == true) {
 				event.setKeepLevel(true);
 				player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory and XP have been saved.");
 				event.setDroppedExp(0);
@@ -47,7 +47,7 @@ public class PvPRestorePlayerListener implements Listener {
 		        player.getInventory().clear();
 		        event.getDrops().clear();				
 			}
-			else if (player.hasPermission("pvprestore.keep.xp") && plugin.getConfig().getBoolean("keep-xp") == true) {
+			else if ((player.hasPermission("pvprestore.keep.xp") || player.hasPermission("pvprestore.keep")) && plugin.getConfig().getBoolean("keep-xp") == true) {
 				if (player.hasPermission("pvprestore.keep.inventory")) {
 					event.setKeepLevel(true);
 					player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory and XP have been saved.");
@@ -71,7 +71,7 @@ public class PvPRestorePlayerListener implements Listener {
 					event.setDroppedExp(0);
 				}
 			}
-			else if (player.hasPermission("pvprestore.keep.inventory") && plugin.getConfig().getBoolean("keep-inventory") == true) {
+			else if ((player.hasPermission("pvprestore.keep.inventory") || player.hasPermission("pvprestore.keep")) && plugin.getConfig().getBoolean("keep-inventory") == true) {
 				if (player.hasPermission("pvprestore.keep.xp")) {
 					event.setKeepLevel(true);
 					player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory and XP have been saved.");
