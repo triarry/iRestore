@@ -1,7 +1,20 @@
 name: PvP Restore
 main: com.github.triarry.PvPRestore.PvPRestore
-version: 1.1.1
+version: 1.2
 commands:
-   pvprestore:
-      description: Tells the player information about this plugin
-      usage: /<command>
+    pvprestore:
+        description: Tells the player information about this plugin
+        usage: /<command>
+permissions:
+    pvprestore.info:
+        description: Tells the player information about this plugin
+        default: true
+    pvprestore.keep:
+        description: Allows the player to keep all their items, armor and XP
+        default: true
+    pvprestore.keep.xp:
+        description: Allows the player to keep their XP
+        default: true
+    pvprestore.keep.inventory:
+        description: Allows the player to keep all their items and armor
+        default: true

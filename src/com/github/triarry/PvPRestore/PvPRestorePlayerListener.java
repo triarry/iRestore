@@ -32,8 +32,8 @@ public class PvPRestorePlayerListener implements Listener {
 		}
 
 		Player killer = player.getKiller();
-		if (player.hasPermission("pvprestore.keep")){
-			if (killer != null) {
+		if (killer != null) {
+			if (player.hasPermission("pvprestore.keep")) {
 				event.setKeepLevel(true);
 				player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory and XP have been saved.");
 				event.setDroppedExp(0);
@@ -45,10 +45,65 @@ public class PvPRestorePlayerListener implements Listener {
 		        armor.put(player, content_armor);
 		        items.put(player, content);
 		        player.getInventory().clear();
-		        event.getDrops().clear();
-			} else {
+		        event.getDrops().clear();				
+			}
+			else if (player.hasPermission("pvprestore.keep.xp") && plugin.getConfig().getBoolean("keep-xp") == true) {
+				if (player.hasPermission("pvprestore.keep.inventory")) {
+					event.setKeepLevel(true);
+					player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory and XP have been saved.");
+					event.setDroppedExp(0);
+					if (plugin.getConfig().getBoolean("death-message") == true) {
+						event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer.getName() + ChatColor.GREEN + ", and their XP and inventory was saved!");
+					}
+					ItemStack[] content = player.getInventory().getContents();
+			        ItemStack[] content_armor = player.getInventory().getArmorContents();
+			        armor.put(player, content_armor);
+			        items.put(player, content);
+			        player.getInventory().clear();
+			        event.getDrops().clear();
+				}
+				else {
+					event.setKeepLevel(true);
+					player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your XP has been saved.");
+					if (plugin.getConfig().getBoolean("death-message") == true) {
+						event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer.getName() + ChatColor.GREEN + ", and their XP was saved!");
+					}
+					event.setDroppedExp(0);
+				}
+			}
+			else if (player.hasPermission("pvprestore.keep.inventory") && plugin.getConfig().getBoolean("keep-inventory") == true) {
+				if (player.hasPermission("pvprestore.keep.xp")) {
+					event.setKeepLevel(true);
+					player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory and XP have been saved.");
+					event.setDroppedExp(0);
+					if (plugin.getConfig().getBoolean("death-message") == true) {
+						event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer.getName() + ChatColor.GREEN + ", and their XP and inventory was saved!");
+					}
+					ItemStack[] content = player.getInventory().getContents();
+			        ItemStack[] content_armor = player.getInventory().getArmorContents();
+			        armor.put(player, content_armor);
+			        items.put(player, content);
+			        player.getInventory().clear();
+			        event.getDrops().clear();
+				}
+				else {
+					player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory has been saved.");
+					if (plugin.getConfig().getBoolean("death-message") == true) {
+						event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer.getName() + ChatColor.GREEN + ", and their inventory was saved!");
+					}
+					ItemStack[] content = player.getInventory().getContents();
+			        ItemStack[] content_armor = player.getInventory().getArmorContents();
+			        armor.put(player, content_armor);
+			        items.put(player, content);
+			        player.getInventory().clear();
+			        event.getDrops().clear();	
+				}
+			}
+			else {
 				player.sendMessage(ChatColor.RED + "Your death was not player related, so your inventory and XP have dropped where you died.");
 			}
+		} else {
+			player.sendMessage(ChatColor.RED + "Your death was not player related, so your inventory and XP have dropped where you died.");
 		}
 	}
 	

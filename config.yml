@@ -10,3 +10,5 @@
 #
 
 death-message: true
+keep-inventory: true
+keep-xp: true
