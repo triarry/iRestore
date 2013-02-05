@@ -1,19 +1,14 @@
 package com.github.triarry.PvPRestore;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.logging.Logger;
-
 import net.milkbowl.vault.economy.Economy;
-
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.*;
+import java.util.logging.Logger;
 
 public class PvPRestore extends JavaPlugin {
 	
@@ -21,6 +16,7 @@ public class PvPRestore extends JavaPlugin {
     File configFile;
     FileConfiguration config;
     public static Economy econ = null;
+    public static boolean myPetEnabled = false;
     private static final Logger log = Logger.getLogger("Minecraft");
 
 	@Override
@@ -45,11 +41,9 @@ public class PvPRestore extends JavaPlugin {
 	    getCommand("pvprestore").setExecutor(new PvPRestoreCommandExecutor(this));
         if (!setupEconomy() ) {
             log.severe(String.format("[%s] - No Vault dependency found! (iConomy, BOSEconomy, etc.)", getDescription().getName()));
-            return;
         }
         if (!setupMyPet() ) {
             log.severe(String.format("[%s] - MyPet not found! Disabling MyPet stuff.", getDescription().getName()));
-            return;
         }
 	}
 	@Override
@@ -73,10 +67,11 @@ public class PvPRestore extends JavaPlugin {
         return econ != null;
     }
     private boolean setupMyPet() {
-        if (getServer().getPluginManager().getPlugin("MyPet") == null) {
-            return false;
+        if (getServer().getPluginManager().isPluginEnabled("MyPet")) {
+            myPetEnabled = true;
+            return true;
         }
-        return true;
+        return false;
     }
 	private void copy(InputStream in, File file) {
 	    try {
