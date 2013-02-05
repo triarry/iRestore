@@ -5,10 +5,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.logging.Logger;
+
+import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class PvPRestore extends JavaPlugin {
@@ -16,6 +20,8 @@ public class PvPRestore extends JavaPlugin {
 	public final PvPRestorePlayerListener playerListener = new PvPRestorePlayerListener(this);
     File configFile;
     FileConfiguration config;
+    public static Economy econ = null;
+    private static final Logger log = Logger.getLogger("Minecraft");
 
 	@Override
 	public void onEnable() {
@@ -37,6 +43,14 @@ public class PvPRestore extends JavaPlugin {
 	    config = new YamlConfiguration();
 	    loadYamls();
 	    getCommand("pvprestore").setExecutor(new PvPRestoreCommandExecutor(this));
+        if (!setupEconomy() ) {
+            log.severe(String.format("[%s] - No Vault dependency found! (iConomy, BOSEconomy, etc.)", getDescription().getName()));
+            return;
+        }
+        if (!setupMyPet() ) {
+            log.severe(String.format("[%s] - MyPet not found! Disabling MyPet stuff.", getDescription().getName()));
+            return;
+        }
 	}
 	@Override
 	public void onDisable() {
@@ -47,6 +61,23 @@ public class PvPRestore extends JavaPlugin {
 	        copy(getResource("config.yml"), configFile);
 	    }
 	}
+    private boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        econ = rsp.getProvider();
+        return econ != null;
+    }
+    private boolean setupMyPet() {
+        if (getServer().getPluginManager().getPlugin("MyPet") == null) {
+            return false;
+        }
+        return true;
+    }
 	private void copy(InputStream in, File file) {
 	    try {
 	        OutputStream out = new FileOutputStream(file);

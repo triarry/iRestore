@@ -14,6 +14,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
+import de.Keyle.MyPet.entity.types.CraftMyPet;
+
 @SuppressWarnings("unused")
 public class PvPRestorePlayerListener implements Listener {
 	
@@ -29,13 +31,13 @@ public class PvPRestorePlayerListener implements Listener {
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
 		Player player = null;
-
+		
 		if (event.getEntity() instanceof Player) {
 			player = event.getEntity();
 		}
-
+		
 		Player killer = player.getKiller();
-		if (killer != null) {
+		if (killer != null || event.getEntity() instanceof CraftMyPet) {
 			if (player.hasPermission("pvprestore.keep") && plugin.getConfig().getBoolean("keep-inventory") == true && plugin.getConfig().getBoolean("keep-xp") == true) {
 				event.setKeepLevel(true);
 				if (plugin.getConfig().getInt("xp-to-remove") < 100 && plugin.getConfig().getInt("xp-to-remove") >= 0) {
@@ -160,5 +162,14 @@ public class PvPRestorePlayerListener implements Listener {
 	            armor.remove(event.getPlayer());
 	        }
 		}
+	}
+	public void moneySteal(PlayerDeathEvent event) {
+		Player player = null;
+
+		if (event.getEntity() instanceof Player) {
+			player = event.getEntity();
+		}
+
+		Player killer = player.getKiller();
 	}
 }
