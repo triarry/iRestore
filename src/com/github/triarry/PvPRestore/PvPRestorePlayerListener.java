@@ -47,14 +47,13 @@ public class PvPRestorePlayerListener implements Listener {
 					player.setLevel((int) (player.getLevel() * ((100.0 - plugin.getConfig().getInt("xp-to-remove")) / 100.0)));
 				}
 				player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory and " + (100 - plugin.getConfig().getInt("xp-to-remove")) + "% of your XP has been saved.");
-				if (plugin.getConfig().getBoolean("vault.enabled") == true) {
+				if (plugin.getConfig().getBoolean("vault.enabled") == true && killer != null) {
 				moneySteal(event);
 				}
 				event.setDroppedExp(0);
 				if (plugin.getConfig().getBoolean("death-message") == true) {
 					event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer.getName() + ChatColor.GREEN + ", and their XP and inventory was saved!");
 				}
-				player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory and " + (100 - plugin.getConfig().getInt("xp-to-remove")) + "% of your XP has been saved.");
 				ItemStack[] content = player.getInventory().getContents();
 		        ItemStack[] content_armor = player.getInventory().getArmorContents();
 		        armor.put(player, content_armor);
@@ -68,7 +67,7 @@ public class PvPRestorePlayerListener implements Listener {
 					if (plugin.getConfig().getInt("xp-to-remove") < 100 && plugin.getConfig().getInt("xp-to-remove") >= 0) {
 						player.setLevel((int) (player.getLevel() * ((100.0 - plugin.getConfig().getInt("xp-to-remove")) / 100.0)));
 					}
-					if (plugin.getConfig().getBoolean("vault.enabled") == true) {
+					if (plugin.getConfig().getBoolean("vault.enabled") == true && killer != null) {
 					moneySteal(event);
 					}
 					event.setDroppedExp(0);
@@ -87,7 +86,7 @@ public class PvPRestorePlayerListener implements Listener {
 					if (plugin.getConfig().getInt("xp-to-remove") < 100 && plugin.getConfig().getInt("xp-to-remove") >= 0) {
 						player.setLevel((int) (player.getLevel() * ((100.0 - plugin.getConfig().getInt("xp-to-remove")) / 100.0)));
 					}
-					if (plugin.getConfig().getBoolean("vault.enabled") == true) {
+					if (plugin.getConfig().getBoolean("vault.enabled") == true && killer != null) {
 					moneySteal(event);
 					}
 					player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so " + (100 - plugin.getConfig().getInt("xp-to-remove")) + "% of your XP has been saved.");
@@ -103,7 +102,7 @@ public class PvPRestorePlayerListener implements Listener {
 					if (plugin.getConfig().getInt("xp-to-remove") < 100 && plugin.getConfig().getInt("xp-to-remove") >= 0) {
 						player.setLevel((int) (player.getLevel() * ((100.0 - plugin.getConfig().getInt("xp-to-remove")) / 100.0)));
 					}
-					if (plugin.getConfig().getBoolean("vault.enabled") == true) {
+					if (plugin.getConfig().getBoolean("vault.enabled") == true && killer != null) {
 					moneySteal(event);
 					}
 					player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory and " + (100 - plugin.getConfig().getInt("xp-to-remove")) + "% of your XP has been saved.");
@@ -123,7 +122,7 @@ public class PvPRestorePlayerListener implements Listener {
 					if (plugin.getConfig().getBoolean("death-message") == true) {
 						event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer.getName() + ChatColor.GREEN + ", and their inventory was saved!");
 					}
-					if (plugin.getConfig().getBoolean("vault.enabled") == true) {
+					if (plugin.getConfig().getBoolean("vault.enabled") == true && killer != null) {
 					moneySteal(event);
 					}
 					ItemStack[] content = player.getInventory().getContents();
