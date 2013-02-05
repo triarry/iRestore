@@ -8,7 +8,6 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
-import java.util.logging.Logger;
 
 public class PvPRestore extends JavaPlugin {
 	
@@ -17,7 +16,6 @@ public class PvPRestore extends JavaPlugin {
     FileConfiguration config;
     public static Economy econ = null;
     public static boolean myPetEnabled = false;
-    private static final Logger log = Logger.getLogger("Minecraft");
 
 	@Override
 	public void onEnable() {
@@ -32,7 +30,7 @@ public class PvPRestore extends JavaPlugin {
 	    try {
 	        Metrics metrics = new Metrics(this);
 	        metrics.start();
-	        System.out.println("[PvP Restore] Now tracking stats!");
+            this.getLogger().info("Now tracking stats!");
 	    } catch (IOException e) {
 	        // Failed to submit the stats :-(
 	    }
@@ -40,10 +38,10 @@ public class PvPRestore extends JavaPlugin {
 	    loadYamls();
 	    getCommand("pvprestore").setExecutor(new PvPRestoreCommandExecutor(this));
         if (!setupEconomy() ) {
-            log.severe(String.format("[%s] - No Vault dependency found! (iConomy, BOSEconomy, etc.)", getDescription().getName()));
+            this.getLogger().info("No Vault dependency found! (iConomy, BOSEconomy, etc.)");
         }
         if (!setupMyPet() ) {
-            log.severe(String.format("[%s] - MyPet not found! Disabling MyPet stuff.", getDescription().getName()));
+            this.getLogger().info("MyPet not found! Disabling MyPet stuff.");
         }
 	}
 	@Override
@@ -97,7 +95,7 @@ public class PvPRestore extends JavaPlugin {
 	public void loadYamls() {
 	    try {
 	        config.load(configFile);
-	        System.out.println("[PvP Restore] Succesfully loaded config.yml");
+            this.getLogger().info("Succesfully loaded config.yml");
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
