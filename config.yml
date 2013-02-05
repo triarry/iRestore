@@ -16,3 +16,8 @@ keep-inventory: true
 keep-xp: true
 # Percentage of XP to remove. Must be between 0 and 99. 0 by default, to remove 0% of XP.
 xp-to-remove: 0
+vault:
+    # Vault is required if you enable this.
+    enabled: true
+    # Percentage of money to steal from a player on kill. Must be between 0 and 100. 2 by default.
+    money-to-steal: 2
