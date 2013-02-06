@@ -41,6 +41,9 @@ public class PvPRestorePlayerListener implements Listener {
                 MyPet myPet = ((CraftMyPet) lastDamageEvent.getDamager()).getMyPet();
                 killer = myPet.getOwner().getName() + "'s pet " + myPet.petName;
             }
+            else if (player.getKiller() != null) {
+            	killer = player.getKiller().getName();
+            }
             else {
                 player.sendMessage(ChatColor.RED + "Your death was not player related, so your inventory and XP have dropped where you died.");
                 return;
