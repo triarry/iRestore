@@ -14,6 +14,7 @@
 death-message: true
 keep-inventory: true
 keep-xp: true
+my-pet-enabled: true
 # Percentage of XP to remove. Must be between 0 and 99. 0 by default, to remove 0% of XP.
 xp-to-remove: 0
 vault:
