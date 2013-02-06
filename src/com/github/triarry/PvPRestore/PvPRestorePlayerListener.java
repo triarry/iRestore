@@ -46,6 +46,10 @@ public class PvPRestorePlayerListener implements Listener {
                 return;
             }
         }
+        // This is so that if the player is killed by the environment as an effect of another player, it STILL counts. - triarry
+        else if (player.getKiller() != null) {
+        	killer = player.getKiller().getName();
+        }
         else {
             player.sendMessage(ChatColor.RED + "Your death was not player related, so your inventory and XP have dropped where you died.");
             return;
