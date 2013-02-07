@@ -1,6 +1,6 @@
 name: PvP Restore
 main: com.github.triarry.PvPRestore.PvPRestore
-version: 1.4
+version: 1.2
 author: triarry
 softdepend: [Vault, MyPet]
 commands:
@@ -10,7 +10,7 @@ commands:
 permissions:
     pvprestore.update:
         description: Tells the player if an update is available.
-        default: false
+        default: op
     pvprestore.info:
         description: Tells the player information about this plugin.
         default: true

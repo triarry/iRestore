@@ -1,12 +1,14 @@
 package com.github.triarry.PvPRestore;
 
 import net.milkbowl.vault.economy.Economy;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.github.triarry.PvPRestore.metrics.Metrics;
 import com.github.triarry.PvPRestore.utilities.Updater;
 import com.github.triarry.PvPRestore.utilities.Updater.UpdateResult;
 
