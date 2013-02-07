@@ -20,7 +20,7 @@ public class PvPRestoreCommandExecutor implements CommandExecutor {
 				Player p = (Player) sender;
 				p.setHealth(0);
 				sender.sendMessage(ChatColor.LIGHT_PURPLE + "#####");
-				sender.sendMessage(ChatColor.GREEN + "Currently running PvP Restore version 1.3");
+				sender.sendMessage(ChatColor.GREEN + "Currently running PvP Restore version 1.4");
 				sender.sendMessage(ChatColor.GREEN + "Plugin made by triarry");
 				sender.sendMessage(ChatColor.LIGHT_PURPLE + "#####");
 				plugin.getLogger().info("A player requested information and was granted access.");
