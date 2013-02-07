@@ -7,16 +7,25 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.github.triarry.PvPRestore.utilities.Updater;
+import com.github.triarry.PvPRestore.utilities.Updater.UpdateResult;
+
 import java.io.*;
 
 public class PvPRestore extends JavaPlugin {
 	
 	public final PvPRestorePlayerListener playerListener = new PvPRestorePlayerListener(this);
+	
     File configFile;
     FileConfiguration config;
+    
     public static Economy econ = null;
+    
     public static boolean myPetEnabled = false;
-
+    
+    public static boolean update = false;
+    public static String ver = "";
+    
 	@Override
 	public void onEnable() {
 		PluginManager pm = getServer().getPluginManager();
@@ -34,6 +43,14 @@ public class PvPRestore extends JavaPlugin {
 	    } catch (IOException e) {
 	        // Failed to submit the stats :-(
 	    }
+	    
+	    if (getConfig().getDouble("version") != 1.4){
+	    	this.getLogger().info("Your config is out of date. Regenerating...");
+            configFile.setWritable(true);
+            configFile.renameTo(new File(getDataFolder() + "/old-config-1-3.yml"));
+	    	reConfig();
+	    }
+	    
 	    config = new YamlConfiguration();
 	    loadYamls();
 	    getCommand("pvprestore").setExecutor(new PvPRestoreCommandExecutor(this));
@@ -43,6 +60,18 @@ public class PvPRestore extends JavaPlugin {
         if (!setupMyPet() ) {
             this.getLogger().info("MyPet not found! Disabling MyPet stuff.");
         }
+		if(getConfig().getBoolean("check-for-updates") == true) {
+			Updater updater = new Updater(this, "pvp-restore", this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
+			updater.getResult();
+			if(updater.getResult() == UpdateResult.UPDATE_AVAILABLE) {
+				update = true;
+			}
+			ver = updater.getLatestVersionString();
+		}
+		if (update == true) {
+			this.getLogger().info("You have an update waiting for you! (dev.bukkit.org/server-mods/pvp-restore/)");
+		}
+		
 	}
 	@Override
 	public void onDisable() {
@@ -53,6 +82,11 @@ public class PvPRestore extends JavaPlugin {
 	        copy(getResource("config.yml"), configFile);
 	    }
 	}
+	private void reConfig() {
+        configFile.getParentFile().mkdirs();
+        copy(getResource("config.yml"), configFile);
+	}
+	
     private boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;

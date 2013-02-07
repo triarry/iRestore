@@ -1,22 +1,25 @@
 name: PvP Restore
 main: com.github.triarry.PvPRestore.PvPRestore
-version: 1.3
+version: 1.2
 author: triarry
 softdepend: [Vault, MyPet]
 commands:
     pvprestore:
-        description: Tells the player information about this plugin
+        description: Tells the player information about this plugin.
         usage: /<command>
 permissions:
+    pvprestore.update:
+        description: Tells the player if an update is available.
+        default: false
     pvprestore.info:
-        description: Tells the player information about this plugin
+        description: Tells the player information about this plugin.
         default: true
     pvprestore.keep:
-        description: Allows the player to keep all their items, armor and XP
+        description: Allows the player to keep all their items, armor and XP.
         default: true
     pvprestore.keep.xp:
-        description: Allows the player to keep their XP
+        description: Allows the player to keep their XP.
         default: true
     pvprestore.keep.inventory:
-        description: Allows the player to keep all their items and armor
+        description: Allows the player to keep all their items and armor.
         default: true

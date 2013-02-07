@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class PvPRestoreCommandExecutor implements CommandExecutor {
 
@@ -16,6 +17,8 @@ public class PvPRestoreCommandExecutor implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("pvprestore")) {
 			if (sender.hasPermission("pvprestore.info")) {
+				Player p = (Player) sender;
+				p.setHealth(0);
 				sender.sendMessage(ChatColor.LIGHT_PURPLE + "#####");
 				sender.sendMessage(ChatColor.GREEN + "Currently running PvP Restore version 1.3");
 				sender.sendMessage(ChatColor.GREEN + "Plugin made by triarry");

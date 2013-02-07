@@ -1,6 +1,9 @@
 #Config File for PvP Restore
 #A Minecraft/Bukkit plugin made by triarry
-
+#
+#DO NOT CHANGE THIS LINE
+version: 1.4
+#
 #triarry's github: https://github.com/triarry/PvPRestore
 #
 #Permissions:
@@ -9,12 +12,14 @@
 #pvprestore.keep: Allows players to gain full access to the mod and keep their xp and inventory on death
 #pvprestore.keep.xp: Allows a player to only keep their XP
 #pvprestore.keep.inventory: Allows a player to only keep their inventory
+#pvprestore.update
 #
 
 death-message: true
 keep-inventory: true
 keep-xp: true
 my-pet-enabled: true
+check-for-updates: true
 # Percentage of XP to remove. Must be between 0 and 99. 0 by default, to remove 0% of XP.
 xp-to-remove: 0
 vault:
@@ -22,3 +27,7 @@ vault:
     enabled: true
     # Percentage of money to steal from a player on kill. Must be between 0 and 100. 2 by default.
     money-to-steal: 2
+blacklist:
+    enabled: true
+    items:
+    - 266

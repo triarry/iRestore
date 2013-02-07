@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -26,7 +27,16 @@ public class PvPRestorePlayerListener implements Listener {
     public PvPRestorePlayerListener(PvPRestore plugin) {
         this.plugin = plugin;
     }
-
+    
+	@EventHandler
+	public void informPlayers(PlayerJoinEvent event) {
+		Player p = event.getPlayer();
+		if (PvPRestore.update == true && p.hasPermission("pvprestore.update")) {
+			p.sendMessage(ChatColor.GREEN + "An update is available: " + ChatColor.GOLD + PvPRestore.ver);
+			p.sendMessage(ChatColor.GREEN + "Download it here: " + ChatColor.GOLD + "http://dev.bukkit.org/server-mods/pvp-restore/");
+		}
+	}
+	
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
