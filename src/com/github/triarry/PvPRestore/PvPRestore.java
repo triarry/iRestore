@@ -11,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.github.triarry.PvPRestore.metrics.Metrics;
 import com.github.triarry.PvPRestore.utilities.Updater;
 import com.github.triarry.PvPRestore.utilities.Updater.UpdateResult;
+import com.github.triarry.PvPRestore.utilities.Utilities;
 
 import java.io.*;
 
@@ -32,6 +33,7 @@ public class PvPRestore extends JavaPlugin {
 	public void onEnable() {
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(this.playerListener, this);
+		Utilities.getUtilities().startUp(this);
 	    configFile = new File(getDataFolder(), "config.yml");
 	    try {
 	        firstRun();

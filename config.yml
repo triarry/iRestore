@@ -31,3 +31,5 @@ blacklist:
     enabled: true
     items:
     - 266
+    - 298
+    - 253

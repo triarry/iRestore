@@ -2,6 +2,9 @@ package com.github.triarry.PvPRestore;
 
 import de.Keyle.MyPet.entity.types.CraftMyPet;
 import de.Keyle.MyPet.entity.types.MyPet;
+
+import com.github.triarry.PvPRestore.utilities.Utilities;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
@@ -36,6 +39,7 @@ public class PvPRestorePlayerListener implements Listener {
 			p.sendMessage(ChatColor.GREEN + "An update is available: " + ChatColor.GOLD + PvPRestore.ver);
 			p.sendMessage(ChatColor.GREEN + "Download it here: " + ChatColor.GOLD + "http://dev.bukkit.org/server-mods/pvp-restore/");
 		}
+		Utilities.getUtilities().blacklistItems(p);
 	}
 	
 	@EventHandler
@@ -91,6 +95,7 @@ public class PvPRestorePlayerListener implements Listener {
             items.put(player, content);
             player.getInventory().clear();
             event.getDrops().clear();
+            dropBlacklist(event);
         }
         else if ((player.hasPermission("pvprestore.keep.xp") || player.hasPermission("pvprestore.keep")) && plugin.getConfig().getBoolean("keep-xp")) {
             if (player.hasPermission("pvprestore.keep.inventory")) {
@@ -111,6 +116,7 @@ public class PvPRestorePlayerListener implements Listener {
                 items.put(player, content);
                 player.getInventory().clear();
                 event.getDrops().clear();
+                dropBlacklist(event);
             }
             else {
                 event.setKeepLevel(true);
@@ -147,6 +153,7 @@ public class PvPRestorePlayerListener implements Listener {
                 items.put(player, content);
                 player.getInventory().clear();
                 event.getDrops().clear();
+                dropBlacklist(event);
             }
             else {
                 player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory has been saved.");
@@ -162,6 +169,7 @@ public class PvPRestorePlayerListener implements Listener {
                 items.put(player, content);
                 player.getInventory().clear();
                 event.getDrops().clear();
+                dropBlacklist(event);
             }
         }
 	}
@@ -172,10 +180,12 @@ public class PvPRestorePlayerListener implements Listener {
             event.getPlayer().getInventory().clear();
             event.getPlayer().getInventory().setContents(items.get(event.getPlayer()));
             items.remove(event.getPlayer());
+            Utilities.getUtilities().blacklistItems(event.getPlayer());
         }
         if(armor.containsKey(event.getPlayer()) && armor.size() != 0) {
             event.getPlayer().getInventory().setArmorContents(armor.get(event.getPlayer()));
             armor.remove(event.getPlayer());
+            Utilities.getUtilities().blacklistItems(event.getPlayer());
         }
 	}
 
@@ -186,10 +196,12 @@ public class PvPRestorePlayerListener implements Listener {
 	            event.getPlayer().getInventory().clear();
 	            event.getPlayer().getInventory().setContents(items.get(event.getPlayer()));
 	            items.remove(event.getPlayer());
+	            Utilities.getUtilities().blacklistItems(event.getPlayer());
 	        }
 	        if(armor.containsKey(event.getPlayer()) && armor.size() != 0) {
 	            event.getPlayer().getInventory().setArmorContents(armor.get(event.getPlayer()));
 	            armor.remove(event.getPlayer());
+	            Utilities.getUtilities().blacklistItems(event.getPlayer());
 	        }
 		}
 	}
@@ -201,27 +213,41 @@ public class PvPRestorePlayerListener implements Listener {
 	            event.getPlayer().getInventory().clear();
 	            event.getPlayer().getInventory().setContents(items.get(event.getPlayer()));
 	            items.remove(event.getPlayer());
+	            Utilities.getUtilities().blacklistItems(event.getPlayer());
 	        }
 	        if(armor.containsKey(event.getPlayer()) && armor.size() != 0) {
 	            event.getPlayer().getInventory().setArmorContents(armor.get(event.getPlayer()));
 	            armor.remove(event.getPlayer());
+	            Utilities.getUtilities().blacklistItems(event.getPlayer());
 	        }
 		}
 	}
 
 	public void moneySteal(PlayerDeathEvent event) {
 		Player player = event.getEntity();
-
 		Player killer = player.getKiller();
 		if (PvPRestore.econ != null && killer != null) {
 			double r = PvPRestore.econ.getBalance(player.getName()) * (plugin.getConfig().getInt("vault.money-to-steal") / 100.0);
-            //plugin.getLogger().info("" + r);
-			//plugin.getLogger().info("" + plugin.getConfig().getInt("vault.money-to-steal"));
             PvPRestore.econ.depositPlayer(killer.getName(), r);
             PvPRestore.econ.withdrawPlayer(player.getName(), r);
 			DecimalFormat dFormat = new DecimalFormat();
 			String d = dFormat.format(r);
 			killer.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "You stole " + ChatColor.RED + d + " " + PvPRestore.econ.currencyNamePlural() + ChatColor.GREEN + " from " + ChatColor.RED + player.getName());
+		}
+	}
+	
+	public void dropBlacklist(PlayerDeathEvent event) {
+	//if (!p.hasPermission("pvprestore.blacklist.override"))
+		Player p = event.getEntity();
+		for (Integer itemList : plugin.getConfig().getIntegerList("blacklist.items")) {
+			Integer i = 0;
+			for (ItemStack itemStackList : items.get(i)) {
+				i++;
+				System.out.print(itemList);
+				if (itemStackList.getTypeId() == itemList) {
+				p.getLocation().getWorld().dropItem(p.getLocation(), itemStackList);
+				}
+			}
 		}
 	}
 }
