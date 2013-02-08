@@ -39,7 +39,7 @@ public class PvPRestorePlayerListener implements Listener {
 			p.sendMessage(ChatColor.GREEN + "An update is available: " + ChatColor.GOLD + PvPRestore.ver);
 			p.sendMessage(ChatColor.GREEN + "Download it here: " + ChatColor.GOLD + "http://dev.bukkit.org/server-mods/pvp-restore/");
 		}
-		Utilities.getUtilities().blacklistItems(p);
+        Utilities.getUtilities().blacklistItems(event.getPlayer());
 	}
 	
 	@EventHandler
@@ -95,6 +95,10 @@ public class PvPRestorePlayerListener implements Listener {
             items.put(player, content);
             player.getInventory().clear();
             dropBlacklist(event);
+            //dropWhitelist(event);
+            if (plugin.getConfig().getBoolean("whitelist.enabled") == false && plugin.getConfig().getBoolean("blacklist.enabled") == false) {
+            	event.getDrops().clear();
+            }
         }
         else if ((player.hasPermission("pvprestore.keep.xp") || player.hasPermission("pvprestore.keep")) && plugin.getConfig().getBoolean("keep-xp")) {
             if (player.hasPermission("pvprestore.keep.inventory")) {
@@ -115,6 +119,10 @@ public class PvPRestorePlayerListener implements Listener {
                 items.put(player, content);
                 player.getInventory().clear();
                 dropBlacklist(event);
+                //dropWhitelist(event);
+                if (plugin.getConfig().getBoolean("whitelist.enabled") == false && plugin.getConfig().getBoolean("blacklist.enabled") == false) {
+                	event.getDrops().clear();
+                }
             }
             else {
                 event.setKeepLevel(true);
@@ -151,6 +159,10 @@ public class PvPRestorePlayerListener implements Listener {
                 items.put(player, content);
                 player.getInventory().clear();
                 dropBlacklist(event);
+                //dropWhitelist(event);
+                if (plugin.getConfig().getBoolean("whitelist.enabled") == false && plugin.getConfig().getBoolean("blacklist.enabled") == false) {
+                	event.getDrops().clear();
+                }
             }
             else {
                 player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory has been saved.");
@@ -166,6 +178,10 @@ public class PvPRestorePlayerListener implements Listener {
                 items.put(player, content);
                 player.getInventory().clear();
                 dropBlacklist(event);
+                //dropWhitelist(event);
+                if (plugin.getConfig().getBoolean("whitelist.enabled") == false && plugin.getConfig().getBoolean("blacklist.enabled") == false) {
+                	event.getDrops().clear();
+                }
             }
         }
 	}
@@ -176,12 +192,16 @@ public class PvPRestorePlayerListener implements Listener {
             event.getPlayer().getInventory().clear();
             event.getPlayer().getInventory().setContents(items.get(event.getPlayer()));
             items.remove(event.getPlayer());
-            Utilities.getUtilities().blacklistItems(event.getPlayer());
+            if (event.getPlayer().hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+            	Utilities.getUtilities().blacklistItems(event.getPlayer());
+            }
         }
         if(armor.containsKey(event.getPlayer()) && armor.size() != 0) {
             event.getPlayer().getInventory().setArmorContents(armor.get(event.getPlayer()));
             armor.remove(event.getPlayer());
-            Utilities.getUtilities().blacklistItems(event.getPlayer());
+            if (event.getPlayer().hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+            	Utilities.getUtilities().blacklistItems(event.getPlayer());
+            }
         }
 	}
 
@@ -192,12 +212,16 @@ public class PvPRestorePlayerListener implements Listener {
 	            event.getPlayer().getInventory().clear();
 	            event.getPlayer().getInventory().setContents(items.get(event.getPlayer()));
 	            items.remove(event.getPlayer());
-	            Utilities.getUtilities().blacklistItems(event.getPlayer());
+	            if (event.getPlayer().hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+	            	Utilities.getUtilities().blacklistItems(event.getPlayer());
+	            }
 	        }
 	        if(armor.containsKey(event.getPlayer()) && armor.size() != 0) {
 	            event.getPlayer().getInventory().setArmorContents(armor.get(event.getPlayer()));
 	            armor.remove(event.getPlayer());
-	            Utilities.getUtilities().blacklistItems(event.getPlayer());
+	            if (event.getPlayer().hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+	            	Utilities.getUtilities().blacklistItems(event.getPlayer());
+	            }
 	        }
 		}
 	}
@@ -209,12 +233,16 @@ public class PvPRestorePlayerListener implements Listener {
 	            event.getPlayer().getInventory().clear();
 	            event.getPlayer().getInventory().setContents(items.get(event.getPlayer()));
 	            items.remove(event.getPlayer());
-	            Utilities.getUtilities().blacklistItems(event.getPlayer());
+	            if (event.getPlayer().hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+	            	Utilities.getUtilities().blacklistItems(event.getPlayer());
+	            }
 	        }
 	        if(armor.containsKey(event.getPlayer()) && armor.size() != 0) {
 	            event.getPlayer().getInventory().setArmorContents(armor.get(event.getPlayer()));
 	            armor.remove(event.getPlayer());
-	            Utilities.getUtilities().blacklistItems(event.getPlayer());
+	            if (event.getPlayer().hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+	            	Utilities.getUtilities().blacklistItems(event.getPlayer());
+	            }
 	        }
 		}
 	}
@@ -233,16 +261,32 @@ public class PvPRestorePlayerListener implements Listener {
 	}
 	
 	public void dropBlacklist(PlayerDeathEvent event) {
-	//if (!p.hasPermission("pvprestore.blacklist.override"))
 		Player p = event.getEntity();
-		for (Integer itemList : plugin.getConfig().getIntegerList("blacklist.items")) {
-			for (ItemStack itemStackList : event.getDrops()) {
-				System.out.print(itemList);
-				if (itemStackList.getTypeId() == itemList) {
-				p.getLocation().getWorld().dropItem(p.getLocation(), itemStackList);
+		if (p.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+			for (Integer itemList : plugin.getConfig().getIntegerList("blacklist.items")) {
+				for (ItemStack itemStackList : event.getDrops()) {
+					if (itemStackList.getTypeId() == itemList) {
+					p.getLocation().getWorld().dropItem(p.getLocation(), itemStackList);
+					}
+				}
+			}
+			event.getDrops().clear();
+		}
+	}
+	/*
+	public void dropWhitelist(PlayerDeathEvent event) {
+		Player p = event.getEntity();
+		if (p.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+			for (Integer itemList : plugin.getConfig().getIntegerList("whitelist.items")) {
+				Integer i = 0;
+				for (ItemStack itemStackList : event.getDrops()) {
+					if (itemStackList.getTypeId() == itemList) {
+					event.getDrops().remove(i);
+					}
+					i++;
 				}
 			}
 		}
-		event.getDrops().clear();
 	}
+	*/
 }

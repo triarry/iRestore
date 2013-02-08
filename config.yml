@@ -28,8 +28,13 @@ vault:
     # Percentage of money to steal from a player on kill. Must be between 0 and 100. 2 by default.
     money-to-steal: 2
 blacklist:
-    enabled: true
+    enabled: false
     items:
     - 266
     - 298
     - 253
+whitelist:
+    enabled: true
+    items:
+    - 299
+    - 300

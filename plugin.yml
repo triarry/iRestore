@@ -23,3 +23,6 @@ permissions:
     pvprestore.keep.inventory:
         description: Allows the player to keep all their items and armor.
         default: true
+    pvprestore.blacklist.drop:
+        description: Forces a player to drop the items described in the items section of the config
+        default: true
