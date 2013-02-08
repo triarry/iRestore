@@ -6,6 +6,7 @@ import de.Keyle.MyPet.entity.types.MyPet;
 import com.github.triarry.PvPRestore.utilities.Utilities;
 
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
@@ -45,12 +46,16 @@ public class PvPRestorePlayerListener implements Listener {
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
+        Monster monster = null;
         String killer;
 
         if(player.getLastDamageCause() instanceof EntityDamageByEntityEvent) {
             EntityDamageByEntityEvent lastDamageEvent = (EntityDamageByEntityEvent) player.getLastDamageCause();
             if(lastDamageEvent.getDamager() instanceof Player) {
                 killer = player.getKiller().getName();
+            }
+            else if (lastDamageEvent.getDamager() instanceof Monster) {
+            	killer = monster.getType().getName();
             }
             else if (lastDamageEvent.getDamager() instanceof TNTPrimed) {
             	killer = player.getKiller().getName();

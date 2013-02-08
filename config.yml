@@ -20,6 +20,8 @@ keep-inventory: true
 keep-xp: true
 my-pet-enabled: true
 check-for-updates: true
+other-events:
+    tnt: true
 # Percentage of XP to remove. Must be between 0 and 99. 0 by default, to remove 0% of XP.
 xp-to-remove: 0
 vault:
