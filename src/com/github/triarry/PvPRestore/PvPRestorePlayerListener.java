@@ -94,7 +94,6 @@ public class PvPRestorePlayerListener implements Listener {
             armor.put(player, content_armor);
             items.put(player, content);
             player.getInventory().clear();
-            event.getDrops().clear();
             dropBlacklist(event);
         }
         else if ((player.hasPermission("pvprestore.keep.xp") || player.hasPermission("pvprestore.keep")) && plugin.getConfig().getBoolean("keep-xp")) {
@@ -115,7 +114,6 @@ public class PvPRestorePlayerListener implements Listener {
                 armor.put(player, content_armor);
                 items.put(player, content);
                 player.getInventory().clear();
-                event.getDrops().clear();
                 dropBlacklist(event);
             }
             else {
@@ -152,7 +150,6 @@ public class PvPRestorePlayerListener implements Listener {
                 armor.put(player, content_armor);
                 items.put(player, content);
                 player.getInventory().clear();
-                event.getDrops().clear();
                 dropBlacklist(event);
             }
             else {
@@ -168,7 +165,6 @@ public class PvPRestorePlayerListener implements Listener {
                 armor.put(player, content_armor);
                 items.put(player, content);
                 player.getInventory().clear();
-                event.getDrops().clear();
                 dropBlacklist(event);
             }
         }
@@ -240,14 +236,13 @@ public class PvPRestorePlayerListener implements Listener {
 	//if (!p.hasPermission("pvprestore.blacklist.override"))
 		Player p = event.getEntity();
 		for (Integer itemList : plugin.getConfig().getIntegerList("blacklist.items")) {
-			Integer i = 0;
-			for (ItemStack itemStackList : items.get(i)) {
-				i++;
+			for (ItemStack itemStackList : event.getDrops()) {
 				System.out.print(itemList);
 				if (itemStackList.getTypeId() == itemList) {
 				p.getLocation().getWorld().dropItem(p.getLocation(), itemStackList);
 				}
 			}
 		}
+		event.getDrops().clear();
 	}
 }
