@@ -18,7 +18,7 @@ version: 1.4
 death-message: true
 keep-inventory: true
 keep-xp: true
-my-pet-enabled: true
+my-pet-enabled: false
 check-for-updates: true
 other-events:
     tnt: true
