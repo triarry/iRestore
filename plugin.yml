@@ -8,6 +8,9 @@ commands:
         description: Tells the player information about this plugin.
         usage: /<command>
 permissions:
+    pvprestore.participate:
+        description: Required for players to actively participate in features of the plugin.
+        default: true
     pvprestore.update:
         description: Tells the player if an update is available.
         default: op

@@ -49,7 +49,10 @@ public class PvPRestorePlayerListener implements Listener {
 
         if(player.getLastDamageCause() instanceof EntityDamageByEntityEvent) {
             EntityDamageByEntityEvent lastDamageEvent = (EntityDamageByEntityEvent) player.getLastDamageCause();
-            if(lastDamageEvent.getDamager() instanceof Player) {
+            if(!player.hasPermission("pvprestore.participate")) {
+            	return;
+            }
+            else if(lastDamageEvent.getDamager() instanceof Player) {
                 killer = player.getKiller().getName();
             }
             else if (lastDamageEvent.getDamager() instanceof TNTPrimed && plugin.getConfig().getBoolean("other-events.tnt") == true) {
@@ -68,6 +71,9 @@ public class PvPRestorePlayerListener implements Listener {
             }
         }
         // This is so that if the player is killed by the environment as an effect of another player, it STILL counts. - triarry
+	    else if(!player.hasPermission("pvprestore.participate")) {
+	    	return;
+	    }
         else if (player.getKiller() != null) {
         	killer = player.getKiller().getName();
         }
@@ -105,7 +111,7 @@ public class PvPRestorePlayerListener implements Listener {
             }
         }
         else if ((player.hasPermission("pvprestore.keep.xp") || player.hasPermission("pvprestore.keep")) && plugin.getConfig().getBoolean("keep-xp")) {
-            if (player.hasPermission("pvprestore.keep.inventory")) {
+            if (player.hasPermission("pvprestore.keep.inventory") && plugin.getConfig().getBoolean("keep-inventory")) {
                 event.setKeepLevel(true);
                 if (plugin.getConfig().getInt("xp-to-remove") < 100 && plugin.getConfig().getInt("xp-to-remove") >= 0) {
                     player.setLevel((int) (player.getLevel() * ((100.0 - plugin.getConfig().getInt("xp-to-remove")) / 100.0)));
@@ -148,7 +154,7 @@ public class PvPRestorePlayerListener implements Listener {
             }
         }
         else if ((player.hasPermission("pvprestore.keep.inventory") || player.hasPermission("pvprestore.keep")) && plugin.getConfig().getBoolean("keep-inventory")) {
-            if (player.hasPermission("pvprestore.keep.xp")) {
+            if (player.hasPermission("pvprestore.keep.xp") && plugin.getConfig().getBoolean("keep-xp")) {
                 event.setKeepLevel(true);
                 if (plugin.getConfig().getInt("xp-to-remove") < 100 && plugin.getConfig().getInt("xp-to-remove") >= 0) {
                     player.setLevel((int) (player.getLevel() * ((100.0 - plugin.getConfig().getInt("xp-to-remove")) / 100.0)));

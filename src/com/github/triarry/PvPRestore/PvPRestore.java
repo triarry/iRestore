@@ -51,7 +51,7 @@ public class PvPRestore extends JavaPlugin {
 	    if (getConfig().getDouble("version") != 1.4){
 	    	this.getLogger().info("Your config is out of date. Regenerating...");
             configFile.setWritable(true);
-            configFile.renameTo(new File(getDataFolder() + "/old-config-1-3.yml"));
+            configFile.renameTo(new File(getDataFolder() + "/old-config.yml"));
 	    	reConfig();
 	    }
 	    
@@ -61,8 +61,10 @@ public class PvPRestore extends JavaPlugin {
         if (!setupEconomy() ) {
             this.getLogger().info("No Vault dependency found! (iConomy, BOSEconomy, etc.)");
         }
-        if (!setupMyPet() ) {
-            this.getLogger().info("MyPet not found! Disabling MyPet stuff.");
+        if (getConfig().getBoolean("my-pet-enabled")) {
+            if (!setupMyPet() ) {
+                this.getLogger().info("MyPet not found! Disabling MyPet stuff.");
+            }
         }
 		if(getConfig().getBoolean("check-for-updates") == true) {
 			Updater updater = new Updater(this, "pvp-restore", this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);

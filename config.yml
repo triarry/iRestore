@@ -31,13 +31,12 @@ vault:
     money-to-steal: 2
 #Do **NOT** have both the blacklist and whitelist on at the same times. Problems will occur!
 blacklist:
-    enabled: false
+    enabled: true
     items:
     - 266
     - 298
-    - 253
 whitelist:
-    enabled: true
+    enabled: false
     items:
     - 299
     - 300

@@ -82,28 +82,24 @@ public class Utilities {
 							    if(p.getInventory().getHelmet().getTypeId() == itemList) {
 							    	p.getInventory().setHelmet(stackList);
 							    	helmetCheck = true;
-							    	System.out.println("Saved your helmet.");
 							    }
 							}
 							if(p.getInventory().getChestplate() != null && chestplateCheck == false) {
 							    if(p.getInventory().getChestplate().getTypeId() == itemList) {
 							    	p.getInventory().setChestplate(stackList);
 							    	chestplateCheck = true;
-							    	System.out.println("Saved your chestplate.");
 							    }
 							}
 							if(p.getInventory().getLeggings() != null && leggingsCheck == false) {
 							    if(p.getInventory().getLeggings().getTypeId() == itemList) {
 							    	p.getInventory().setLeggings(stackList);
 							    	leggingsCheck = true;
-							    	System.out.println("Saved your leggings.");
 							    }
 							}
 							if(p.getInventory().getBoots() != null && bootsCheck == false) {
 							    if(p.getInventory().getBoots().getTypeId() == itemList) {
 							    	p.getInventory().setBoots(stackList);
 							    	bootsCheck = true;
-							    	System.out.println("Saved your boots.");
 							    }
 							}
 						}
