@@ -26,9 +26,10 @@ other-events:
 xp-to-remove: 0
 vault:
     # Vault is required if you enable this.
-    enabled: true
+    enabled: false
     # Percentage of money to steal from a player on kill. Must be between 0 and 100. 2 by default.
     money-to-steal: 2
+#Do **NOT** have both the blacklist and whitelist on at the same times. Problems will occur!
 blacklist:
     enabled: false
     items:
