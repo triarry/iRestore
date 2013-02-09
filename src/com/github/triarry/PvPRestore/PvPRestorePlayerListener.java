@@ -20,6 +20,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class PvPRestorePlayerListener implements Listener {
 	
@@ -93,9 +94,13 @@ public class PvPRestorePlayerListener implements Listener {
             armor.put(player, content_armor);
             items.put(player, content);
             player.getInventory().clear();
-            dropBlacklist(event);
-            dropWhitelist(event);
-            if (plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
+            if (player.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+                dropBlacklist(event);
+            }
+            else if (player.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+                dropWhitelist(event);
+            }
+            else if (plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
             	event.getDrops().clear();
             }
         }
@@ -117,9 +122,13 @@ public class PvPRestorePlayerListener implements Listener {
                 armor.put(player, content_armor);
                 items.put(player, content);
                 player.getInventory().clear();
-                dropBlacklist(event);
-                dropWhitelist(event);
-                if (plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
+                if (player.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+                    dropBlacklist(event);
+                }
+                else if (player.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+                    dropWhitelist(event);
+                }
+                else if (plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
                 	event.getDrops().clear();
                 }
             }
@@ -157,8 +166,12 @@ public class PvPRestorePlayerListener implements Listener {
                 armor.put(player, content_armor);
                 items.put(player, content);
                 player.getInventory().clear();
-                dropBlacklist(event);
-                dropWhitelist(event);
+                if (player.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+                    dropBlacklist(event);
+                }
+                if (player.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+                    dropWhitelist(event);
+                }
                 if (plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
                 	event.getDrops().clear();
                 }
@@ -176,9 +189,13 @@ public class PvPRestorePlayerListener implements Listener {
                 armor.put(player, content_armor);
                 items.put(player, content);
                 player.getInventory().clear();
-                dropBlacklist(event);
-                dropWhitelist(event);
-                if (plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
+                if (player.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+                    dropBlacklist(event);
+                }
+                else if (player.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+                    dropWhitelist(event);
+                }
+                else if (plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
                 	event.getDrops().clear();
                 }
             }
@@ -282,30 +299,25 @@ public class PvPRestorePlayerListener implements Listener {
 	
 	public void dropBlacklist(PlayerDeathEvent event) {
 		Player p = event.getEntity();
-		if (p.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
-			for (Integer itemList : plugin.getConfig().getIntegerList("blacklist.items")) {
-				for (ItemStack itemStackList : event.getDrops()) {
-					if (itemStackList.getTypeId() == itemList) {
+		for (Integer itemList : plugin.getConfig().getIntegerList("blacklist.items")) {
+			for (ItemStack itemStackList : event.getDrops()) {
+				if (itemStackList.getTypeId() == itemList) {
 					p.getLocation().getWorld().dropItem(p.getLocation(), itemStackList);
-					}
 				}
 			}
-			event.getDrops().clear();
 		}
+		event.getDrops().clear();
 	}
 	
 	public void dropWhitelist(PlayerDeathEvent event) {
-		Player p = event.getEntity();
-		if (p.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
-			for (Integer itemList : plugin.getConfig().getIntegerList("whitelist.items")) {
-				for (ItemStack itemStackList : event.getDrops()) {
-					if (itemStackList.getTypeId() == itemList) {
-						Integer i = event.getDrops().indexOf(itemStackList);
-						System.out.print(i);
-						event.getDrops().remove(i);
-					}
+		for (Integer itemList : plugin.getConfig().getIntegerList("whitelist.items")) {
+			Iterator<ItemStack> iterator = event.getDrops().iterator();
+			while (iterator.hasNext()) {
+				ItemStack itemStack = iterator.next();
+				if (itemStack.getTypeId() == itemList) {
+					iterator.remove();
 				}
 			}
-		}
+		}	
 	}
 }
