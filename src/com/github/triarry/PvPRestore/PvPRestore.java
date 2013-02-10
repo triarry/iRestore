@@ -48,7 +48,7 @@ public class PvPRestore extends JavaPlugin {
 	        // Failed to submit the stats :-(
 	    }
 	    
-	    if (getConfig().getDouble("version") != 1.4){
+	    if (getConfig().getString("version") != "1.4.1" || !config.contains("version")){
 	    	this.getLogger().info("Your config is out of date. Regenerating...");
             configFile.setWritable(true);
             configFile.renameTo(new File(getDataFolder() + "/old-config.yml"));

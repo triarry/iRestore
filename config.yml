@@ -2,17 +2,22 @@
 #A Minecraft/Bukkit plugin made by triarry
 #
 #DO NOT CHANGE THIS LINE
-version: 1.4
+version: 1.4.1
 #
 #triarry's github: https://github.com/triarry/PvPRestore
 #
 #Permissions:
 #
+#pvprestore.participate: Allows players to participate in the plugin.
+#pvprestore.blacklist.drop: Forces players to drop all items in the blacklist on a PvP related death
+#pvprestore.whitelist.drop: Forces players to keep all items in the blacklist on a PvP related death
 #pvprestore.info: Allows players to type /pvprestore
 #pvprestore.keep: Allows players to gain full access to the mod and keep their xp and inventory on death
 #pvprestore.keep.xp: Allows a player to only keep their XP
 #pvprestore.keep.inventory: Allows a player to only keep their inventory
-#pvprestore.update
+#pvprestore.update: Allows server owners to see if an update is available. Op by default.
+#pvprestore.money.steal: Allows a player to steal another players money
+#pvprestore.money.exempt: Overrides another player's ability to steal your money
 #
 
 death-message: true
@@ -22,6 +27,7 @@ my-pet-enabled: false
 check-for-updates: true
 other-events:
     tnt: true
+    dispenser: true
 # Percentage of XP to remove. Must be between 0 and 99. 0 by default, to remove 0% of XP.
 xp-to-remove: 0
 vault:
@@ -31,7 +37,7 @@ vault:
     money-to-steal: 2
 #Do **NOT** have both the blacklist and whitelist on at the same times. Problems will occur!
 blacklist:
-    enabled: true
+    enabled: false
     items:
     - 266
     - 298

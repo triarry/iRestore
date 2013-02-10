@@ -88,7 +88,7 @@ public class PvPRestorePlayerListener implements Listener {
                 player.setLevel((int) (player.getLevel() * ((100.0 - plugin.getConfig().getInt("xp-to-remove")) / 100.0)));
             }
             player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory and " + (100 - plugin.getConfig().getInt("xp-to-remove")) + "% of your XP has been saved.");
-            if (plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
+            if (player.hasPermission("pvprestore.money.steal") && plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
                 moneySteal(event);
             }
             event.setDroppedExp(0);
@@ -116,7 +116,7 @@ public class PvPRestorePlayerListener implements Listener {
                 if (plugin.getConfig().getInt("xp-to-remove") < 100 && plugin.getConfig().getInt("xp-to-remove") >= 0) {
                     player.setLevel((int) (player.getLevel() * ((100.0 - plugin.getConfig().getInt("xp-to-remove")) / 100.0)));
                 }
-                if (plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
+                if (player.hasPermission("pvprestore.money.steal") && plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
                     moneySteal(event);
                 }
                 event.setDroppedExp(0);
@@ -143,7 +143,7 @@ public class PvPRestorePlayerListener implements Listener {
                 if (plugin.getConfig().getInt("xp-to-remove") < 100 && plugin.getConfig().getInt("xp-to-remove") >= 0) {
                     player.setLevel((int) (player.getLevel() * ((100.0 - plugin.getConfig().getInt("xp-to-remove")) / 100.0)));
                 }
-                if (plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
+                if (player.hasPermission("pvprestore.money.steal") && plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
                     moneySteal(event);
                 }
                 player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so " + (100 - plugin.getConfig().getInt("xp-to-remove")) + "% of your XP has been saved.");
@@ -159,7 +159,7 @@ public class PvPRestorePlayerListener implements Listener {
                 if (plugin.getConfig().getInt("xp-to-remove") < 100 && plugin.getConfig().getInt("xp-to-remove") >= 0) {
                     player.setLevel((int) (player.getLevel() * ((100.0 - plugin.getConfig().getInt("xp-to-remove")) / 100.0)));
                 }
-                if (plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
+                if (player.hasPermission("pvprestore.money.steal") && plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
                     moneySteal(event);
                 }
                 player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory and " + (100 - plugin.getConfig().getInt("xp-to-remove")) + "% of your XP has been saved.");
@@ -187,7 +187,7 @@ public class PvPRestorePlayerListener implements Listener {
                 if (plugin.getConfig().getBoolean("death-message")) {
                     event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer + ChatColor.GREEN + ", and their inventory was saved!");
                 }
-                if (plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
+                if (player.hasPermission("pvprestore.money.steal") && plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
                     moneySteal(event);
                 }
                 ItemStack[] content = player.getInventory().getContents();
@@ -293,7 +293,7 @@ public class PvPRestorePlayerListener implements Listener {
 	public void moneySteal(PlayerDeathEvent event) {
 		Player player = event.getEntity();
 		Player killer = player.getKiller();
-		if (PvPRestore.econ != null && killer != null) {
+		if (!player.hasPermission("pvprestore.money.exempt") && PvPRestore.econ != null && killer != null) {
 			double r = PvPRestore.econ.getBalance(player.getName()) * (plugin.getConfig().getInt("vault.money-to-steal") / 100.0);
             PvPRestore.econ.depositPlayer(killer.getName(), r);
             PvPRestore.econ.withdrawPlayer(player.getName(), r);
