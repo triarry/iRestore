@@ -58,6 +58,11 @@ public class PvPRestorePlayerListener implements Listener {
             else if (lastDamageEvent.getDamager() instanceof TNTPrimed && plugin.getConfig().getBoolean("other-events.tnt") == true) {
             	killer = "TNT";
             }
+            /*
+            else if (plugin.getConfig().getBoolean("dispenser") && (lastDamageEvent.getDamager() instanceof Arrow || lastDamageEvent.getDamager() instanceof Projectile)) {
+            	killer = "Dispenser";
+            }
+            */
             else if(PvPRestore.myPetEnabled && lastDamageEvent.getDamager() instanceof CraftMyPet && plugin.getConfig().getBoolean("my-pet-enabled") == true) {
                 MyPet myPet = ((CraftMyPet) lastDamageEvent.getDamager()).getMyPet();
                 killer = myPet.getOwner().getName() + "'s pet " + myPet.petName;
