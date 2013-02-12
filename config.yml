@@ -2,7 +2,7 @@
 #A Minecraft/Bukkit plugin made by triarry
 #
 #DO NOT CHANGE THIS LINE
-version: 1.4.1
+version: 1.5
 #
 #triarry's github: https://github.com/triarry/PvPRestore
 #
@@ -27,7 +27,6 @@ my-pet-enabled: false
 check-for-updates: true
 other-events:
     tnt: true
-    dispenser: true
 # Percentage of XP to remove. Must be between 0 and 99. 0 by default, to remove 0% of XP.
 xp-to-remove: 0
 vault:

@@ -47,14 +47,14 @@ public class PvPRestore extends JavaPlugin {
 	    } catch (IOException e) {
 	        // Failed to submit the stats :-(
 	    }
-	    if (getConfig().getString("version") != "1.4.1"){
+	    config = new YamlConfiguration();
+	    loadYamls();
+	    if (getConfig().getDouble("version") != 1.5) {
 	    	this.getLogger().info("Your config is out of date. Regenerating...");
             configFile.setWritable(true);
             configFile.renameTo(new File(getDataFolder() + "/old-config.yml"));
 	    	reConfig();
 	    }
-	    config = new YamlConfiguration();
-	    loadYamls();
 	    getCommand("pvprestore").setExecutor(new PvPRestoreCommandExecutor(this));
         if (!setupEconomy() ) {
             this.getLogger().info("No Vault dependency found! (iConomy, BOSEconomy, etc.)");
@@ -138,5 +138,4 @@ public class PvPRestore extends JavaPlugin {
 	        e.printStackTrace();
 	    }
 	}
-
 }

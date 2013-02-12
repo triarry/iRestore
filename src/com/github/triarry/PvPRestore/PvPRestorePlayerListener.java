@@ -6,6 +6,7 @@ import de.Keyle.MyPet.entity.types.MyPet;
 import com.github.triarry.PvPRestore.utilities.Utilities;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
@@ -58,11 +59,10 @@ public class PvPRestorePlayerListener implements Listener {
             else if (lastDamageEvent.getDamager() instanceof TNTPrimed && plugin.getConfig().getBoolean("other-events.tnt") == true) {
             	killer = "TNT";
             }
-            /*
-            else if (plugin.getConfig().getBoolean("dispenser") && (lastDamageEvent.getDamager() instanceof Arrow || lastDamageEvent.getDamager() instanceof Projectile)) {
+            //plugin.getConfig().getBoolean("dispenser") && 
+            else if (lastDamageEvent.getDamager() instanceof Dispenser) {
             	killer = "Dispenser";
             }
-            */
             else if(PvPRestore.myPetEnabled && lastDamageEvent.getDamager() instanceof CraftMyPet && plugin.getConfig().getBoolean("my-pet-enabled") == true) {
                 MyPet myPet = ((CraftMyPet) lastDamageEvent.getDamager()).getMyPet();
                 killer = myPet.getOwner().getName() + "'s pet " + myPet.petName;
