@@ -6,12 +6,13 @@ import de.Keyle.MyPet.entity.types.MyPet;
 import com.github.triarry.PvPRestore.utilities.Utilities;
 
 import org.bukkit.ChatColor;
-import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
@@ -35,7 +36,7 @@ public class PvPRestorePlayerListener implements Listener {
     }
     
 	@EventHandler
-	public void informPlayers(PlayerJoinEvent event) {
+	public void informAdmins(PlayerJoinEvent event) {
 		Player p = event.getPlayer();
 		if (PvPRestore.update == true && p.hasPermission("pvprestore.update")) {
 			p.sendMessage(ChatColor.GREEN + "An update is available: " + ChatColor.GOLD + PvPRestore.ver);
@@ -47,6 +48,7 @@ public class PvPRestorePlayerListener implements Listener {
 	public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
         String killer;
+        EntityDamageEvent playerDamage = event.getEntity().getLastDamageCause();
 
         if(player.getLastDamageCause() instanceof EntityDamageByEntityEvent) {
             EntityDamageByEntityEvent lastDamageEvent = (EntityDamageByEntityEvent) player.getLastDamageCause();
@@ -56,12 +58,8 @@ public class PvPRestorePlayerListener implements Listener {
             else if(lastDamageEvent.getDamager() instanceof Player) {
                 killer = player.getKiller().getName();
             }
-            else if (lastDamageEvent.getDamager() instanceof TNTPrimed && plugin.getConfig().getBoolean("other-events.tnt") == true) {
+            else if (lastDamageEvent.getDamager() instanceof TNTPrimed && plugin.getConfig().getBoolean("other-events.tnt") == true && player.hasPermission("pvprestore.events.tnt")) {
             	killer = "TNT";
-            }
-            //plugin.getConfig().getBoolean("dispenser") && 
-            else if (lastDamageEvent.getDamager() instanceof Dispenser) {
-            	killer = "Dispenser";
             }
             else if(PvPRestore.myPetEnabled && lastDamageEvent.getDamager() instanceof CraftMyPet && plugin.getConfig().getBoolean("my-pet-enabled") == true) {
                 MyPet myPet = ((CraftMyPet) lastDamageEvent.getDamager()).getMyPet();
@@ -69,6 +67,27 @@ public class PvPRestorePlayerListener implements Listener {
             }
             else if (player.getKiller() != null) {
             	killer = player.getKiller().getName();
+            }
+            else if (playerDamage.getCause() == DamageCause.FIRE && plugin.getConfig().getBoolean("other-events.fire") == true && player.hasPermission("pvprestore.events.fire")) {
+            	killer = "Fire";
+            }
+            else if (playerDamage.getCause() == DamageCause.VOID && plugin.getConfig().getBoolean("other-events.void") == true && player.hasPermission("pvprestore.events.void")) {
+            	killer = "The Void";
+            }
+            else if (playerDamage.getCause() == DamageCause.LAVA && plugin.getConfig().getBoolean("other-events.lava") == true && player.hasPermission("pvprestore.events.lava")) {
+            	killer = "Lava";
+            }
+            else if (playerDamage.getCause() == DamageCause.CONTACT && plugin.getConfig().getBoolean("other-events.cactus") == true && player.hasPermission("pvprestore.events.cactus")) {
+            	killer = "A Cactus";
+            }
+            else if (playerDamage.getCause() == DamageCause.DROWNING && plugin.getConfig().getBoolean("other-events.drowning") == true && player.hasPermission("pvprestore.events.drowning")) {
+            	killer = "The Water";
+            }
+            else if (playerDamage.getCause() == DamageCause.STARVATION && plugin.getConfig().getBoolean("other-events.starvation") == true && player.hasPermission("pvprestore.events.starvation")) {
+            	killer = "Their Lack of Food";
+            }
+            else if (playerDamage.getCause() == DamageCause.SUFFOCATION && plugin.getConfig().getBoolean("other-events.suffocation") == true && player.hasPermission("pvprestore.events.suffocation")) {
+            	killer = "Their Lack of Air";
             }
             else {
                 player.sendMessage(ChatColor.RED + "Your death was not player related, so your inventory and XP have dropped where you died.");
@@ -79,6 +98,27 @@ public class PvPRestorePlayerListener implements Listener {
 	    else if(!player.hasPermission("pvprestore.participate")) {
 	    	return;
 	    }
+        else if (playerDamage.getCause() == DamageCause.FIRE && plugin.getConfig().getBoolean("other-events.fire") == true && player.hasPermission("pvprestore.events.fire")) {
+        	killer = "Fire";
+        }
+        else if (playerDamage.getCause() == DamageCause.VOID && plugin.getConfig().getBoolean("other-events.void") == true && player.hasPermission("pvprestore.events.void")) {
+        	killer = "The Void";
+        }
+        else if (playerDamage.getCause() == DamageCause.LAVA && plugin.getConfig().getBoolean("other-events.lava") == true && player.hasPermission("pvprestore.events.lava")) {
+        	killer = "Lava";
+        }
+        else if (playerDamage.getCause() == DamageCause.CONTACT && plugin.getConfig().getBoolean("other-events.cactus") == true && player.hasPermission("pvprestore.events.cactus")) {
+        	killer = "A Cactus";
+        }
+        else if (playerDamage.getCause() == DamageCause.DROWNING && plugin.getConfig().getBoolean("other-events.drowning") == true && player.hasPermission("pvprestore.events.drowning")) {
+        	killer = "The Water";
+        }
+        else if (playerDamage.getCause() == DamageCause.STARVATION && plugin.getConfig().getBoolean("other-events.starvation") == true && player.hasPermission("pvprestore.events.starvation")) {
+        	killer = "Their Lack of Food";
+        }
+        else if (playerDamage.getCause() == DamageCause.SUFFOCATION && plugin.getConfig().getBoolean("other-events.suffocation") == true && player.hasPermission("pvprestore.events.suffocation")) {
+        	killer = "Their Lack of Air";
+        }
         else if (player.getKiller() != null) {
         	killer = player.getKiller().getName();
         }
@@ -216,7 +256,7 @@ public class PvPRestorePlayerListener implements Listener {
 	@EventHandler
 	public void onPlayerRespawn(PlayerRespawnEvent event) {
 		Player p = event.getPlayer();
-        if (items.containsKey(event.getPlayer())) {
+        if (items.containsKey(p)) {
             p.getInventory().clear();
             p.getInventory().setContents(items.get(p));
             items.remove(p);
@@ -243,7 +283,7 @@ public class PvPRestorePlayerListener implements Listener {
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		if (event.getPlayer().isDead()) {
 			Player p = event.getPlayer();
-	        if (items.containsKey(event.getPlayer())) {
+	        if (items.containsKey(p)) {
 	            p.getInventory().clear();
 	            p.getInventory().setContents(items.get(p));
 	            items.remove(p);
@@ -254,7 +294,7 @@ public class PvPRestorePlayerListener implements Listener {
 	            	Utilities.getUtilities().whitelistItems(p);
 	            }
 	        }
-	        if (armor.containsKey(event.getPlayer()) && armor.size() != 0) {
+	        if (armor.containsKey(p) && armor.size() != 0) {
 	            p.getInventory().setArmorContents(armor.get(p));
 	            armor.remove(p);
 	            if (p.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
@@ -271,7 +311,7 @@ public class PvPRestorePlayerListener implements Listener {
 	public void onPlayerKick(PlayerKickEvent event) {
 		if (event.getPlayer().isDead()) {
 			Player p = event.getPlayer();
-	        if (items.containsKey(event.getPlayer())) {
+	        if (items.containsKey(p)) {
 	            p.getInventory().clear();
 	            p.getInventory().setContents(items.get(p));
 	            items.remove(p);
@@ -296,15 +336,15 @@ public class PvPRestorePlayerListener implements Listener {
 	}
 
 	public void moneySteal(PlayerDeathEvent event) {
-		Player player = event.getEntity();
-		Player killer = player.getKiller();
-		if (!player.hasPermission("pvprestore.money.exempt") && PvPRestore.econ != null && killer != null) {
-			double r = PvPRestore.econ.getBalance(player.getName()) * (plugin.getConfig().getInt("vault.money-to-steal") / 100.0);
-            PvPRestore.econ.depositPlayer(killer.getName(), r);
-            PvPRestore.econ.withdrawPlayer(player.getName(), r);
+		Player p = event.getEntity();
+		Player k = p.getKiller();
+		if (!p.hasPermission("pvprestore.money.exempt") && PvPRestore.econ != null && k != null) {
+			double r = PvPRestore.econ.getBalance(p.getName()) * (plugin.getConfig().getInt("vault.money-to-steal") / 100.0);
+            PvPRestore.econ.depositPlayer(k.getName(), r);
+            PvPRestore.econ.withdrawPlayer(p.getName(), r);
 			DecimalFormat dFormat = new DecimalFormat();
 			String d = dFormat.format(r);
-			killer.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "You stole " + ChatColor.RED + d + " " + PvPRestore.econ.currencyNamePlural() + ChatColor.GREEN + " from " + ChatColor.RED + player.getName());
+			k.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "You stole " + ChatColor.RED + d + " " + PvPRestore.econ.currencyNamePlural() + ChatColor.GREEN + " from " + ChatColor.RED + p.getName());
 		}
 	}
 	
@@ -329,6 +369,18 @@ public class PvPRestorePlayerListener implements Listener {
 					iterator.remove();
 				}
 			}
+		}
+	}
+	
+	public void percentageDrop(PlayerDeathEvent event) {
+		Iterator<ItemStack> iterator = event.getDrops().iterator();
+		Double percentage = (plugin.getConfig().getInt("percentage-drop.percentage") / 100.0);
+		Integer i = 0;
+		Integer dropModifier = (int) (percentage * event.getDrops().size());
+		System.out.println(dropModifier);
+		while (i < dropModifier && iterator.hasNext()) {
+			iterator.remove();
+			i++;
 		}	
 	}
 }

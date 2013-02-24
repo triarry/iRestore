@@ -1,6 +1,6 @@
 name: PvP Restore
 main: com.github.triarry.PvPRestore.PvPRestore
-version: 1.4.1
+version: 1.4.2
 author: triarry
 softdepend: [Vault, MyPet]
 commands:
@@ -38,3 +38,27 @@ permissions:
     pvprestore.money.exempt:
         description: Overrides another player's ability to steal your money
         default: op
+    pvprestore.events.tnt:
+        description: Allows a player's inventory to be saved by a TNT death
+        default: true
+    pvprestore.events.fire:
+        description: Allows a player's inventory to be saved by a fire death
+        default: true
+    pvprestore.events.void:
+        description: Allows a player's inventory to be saved by a void death
+        default: true
+    pvprestore.events.lava:
+        description: Allows a player's inventory to be saved by a lava death
+        default: true
+    pvprestore.events.cactus:
+        description: Allows a player's inventory to be saved by a cactus death
+        default: true
+    pvprestore.events.drowning:
+        description: Allows a player's inventory to be saved by drowning
+        default: true
+    pvprestore.events.starvation:
+        description: Allows a player's inventory to be saved by starving
+        default: true
+    pvprestore.events.suffocation:
+        description: Allows a player's inventory to be saved by suffocating
+        default: true
