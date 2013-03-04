@@ -39,7 +39,3 @@ whitelist:
     items:
     - 299
     - 300
-percentage-drop:
-    enabled: false
-    #Percentage of items to drop. Must be between 0 and 100. 0 by default, to keep 0% of all items
-    percentage: 0

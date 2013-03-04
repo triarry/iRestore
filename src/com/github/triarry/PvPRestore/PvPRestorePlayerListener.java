@@ -145,10 +145,10 @@ public class PvPRestorePlayerListener implements Listener {
             armor.put(player, content_armor);
             items.put(player, content);
             player.getInventory().clear();
-            if (player.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+            if (plugin.getConfig().getBoolean("blacklist.enabled") == true) {
                 dropBlacklist(event);
             }
-            else if (player.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+            else if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
                 dropWhitelist(event);
             }
             else if (plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
@@ -173,10 +173,10 @@ public class PvPRestorePlayerListener implements Listener {
                 armor.put(player, content_armor);
                 items.put(player, content);
                 player.getInventory().clear();
-                if (player.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+                if (plugin.getConfig().getBoolean("blacklist.enabled") == true) {
                     dropBlacklist(event);
                 }
-                else if (player.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+                else if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
                     dropWhitelist(event);
                 }
                 else if (plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
@@ -217,10 +217,10 @@ public class PvPRestorePlayerListener implements Listener {
                 armor.put(player, content_armor);
                 items.put(player, content);
                 player.getInventory().clear();
-                if (player.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+                if (plugin.getConfig().getBoolean("blacklist.enabled") == true) {
                     dropBlacklist(event);
                 }
-                if (player.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+                if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
                     dropWhitelist(event);
                 }
                 if (plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
@@ -240,10 +240,10 @@ public class PvPRestorePlayerListener implements Listener {
                 armor.put(player, content_armor);
                 items.put(player, content);
                 player.getInventory().clear();
-                if (player.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+                if (plugin.getConfig().getBoolean("blacklist.enabled") == true) {
                     dropBlacklist(event);
                 }
-                else if (player.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+                else if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
                     dropWhitelist(event);
                 }
                 else if (plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
@@ -260,20 +260,20 @@ public class PvPRestorePlayerListener implements Listener {
             p.getInventory().clear();
             p.getInventory().setContents(items.get(p));
             items.remove(p);
-            if (p.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+            if (plugin.getConfig().getBoolean("blacklist.enabled") == true) {
             	Utilities.getUtilities().blacklistItems(p);
             }
-            if (p.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+            if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
             	Utilities.getUtilities().whitelistItems(p);
             }
         }
         if (armor.containsKey(event.getPlayer()) && armor.size() != 0) {
             p.getInventory().setArmorContents(armor.get(p));
             armor.remove(p);
-            if (p.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+            if (plugin.getConfig().getBoolean("blacklist.enabled") == true) {
             	Utilities.getUtilities().blacklistItems(p);
             }
-            if (p.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+            if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
             	Utilities.getUtilities().whitelistArmor(p);
             }
         }
@@ -287,20 +287,20 @@ public class PvPRestorePlayerListener implements Listener {
 	            p.getInventory().clear();
 	            p.getInventory().setContents(items.get(p));
 	            items.remove(p);
-	            if (p.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+	            if (plugin.getConfig().getBoolean("blacklist.enabled") == true) {
 	            	Utilities.getUtilities().blacklistItems(p);
 	            }
-	            if (p.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+	            if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
 	            	Utilities.getUtilities().whitelistItems(p);
 	            }
 	        }
 	        if (armor.containsKey(p) && armor.size() != 0) {
 	            p.getInventory().setArmorContents(armor.get(p));
 	            armor.remove(p);
-	            if (p.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+	            if (plugin.getConfig().getBoolean("blacklist.enabled") == true) {
 	            	Utilities.getUtilities().blacklistItems(p);
 	            }
-	            if (p.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+	            if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
 	            	Utilities.getUtilities().whitelistArmor(p);
 	            }
 	        }

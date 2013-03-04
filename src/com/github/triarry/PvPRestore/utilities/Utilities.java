@@ -19,7 +19,7 @@ public class Utilities {
     }
     
 	public void blacklistItems(Player p) {
-		if (p.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+		if (plugin.getConfig().getBoolean("blacklist.enabled") == true) {
 			for (Integer itemList : plugin.getConfig().getIntegerList("blacklist.items")) {
 				p.getInventory().remove(itemList);
 				if(p.getInventory().getHelmet() != null) {
@@ -48,7 +48,7 @@ public class Utilities {
 	
 	public void whitelistItems(Player p) {
 		Boolean itemCheck = false;
-		if (p.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+		if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
 			for (ItemStack stackList : p.getInventory().getContents()) {
 				for (Integer itemList : plugin.getConfig().getIntegerList("whitelist.items")) {
 					if (stackList != null) {
@@ -73,7 +73,7 @@ public class Utilities {
 		Boolean chestplateCheck = false;
 		Boolean leggingsCheck = false;
 		Boolean bootsCheck = false;
-		if (p.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+		if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
 			for (ItemStack stackList : p.getInventory().getArmorContents()) {
 				for (Integer itemList : plugin.getConfig().getIntegerList("whitelist.items")) {
 					if (stackList != null) {
