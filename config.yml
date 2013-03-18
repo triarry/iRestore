@@ -2,7 +2,7 @@
 #A Minecraft/Bukkit plugin made by triarry
 #
 #DO NOT CHANGE THIS LINE
-version: 1.6
+version: 1.7
 #
 #triarry's github: https://github.com/triarry/PvPRestore
 #
@@ -13,14 +13,14 @@ keep-xp: true
 my-pet-enabled: false
 check-for-updates: true
 other-events:
-    tnt: true
-    fire: true
-    void: true
-    lava: true
-    cactus: true
-    drowning: true
-    starvation: true
-    suffocation: true
+    tnt: false
+    fire: false
+    void: false
+    lava: false
+    cactus: false
+    drowning: false
+    starvation: false
+    suffocation: false
 # Percentage of XP to remove. Must be between 0 and 99. 0 by default, to remove 0% of XP.
 xp-to-remove: 0
 vault:
@@ -39,3 +39,7 @@ whitelist:
     items:
     - 299
     - 300
+percentage-drop:
+    enabled: false
+    #Percentage of items to drop. Must be between 0 and 100. 0 by default, to keep 0% of all items
+    percentage: 50
