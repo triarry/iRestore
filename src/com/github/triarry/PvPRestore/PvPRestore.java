@@ -49,7 +49,7 @@ public class PvPRestore extends JavaPlugin {
 	    }
 	    config = new YamlConfiguration();
 	    loadYamls();
-	    if (getConfig().getDouble("version") != 1.7) {
+	    if (getConfig().getDouble("version") != 1.8) {
 	    	this.getLogger().info("Your config is out of date. Regenerating...");
             configFile.setWritable(true);
             configFile.renameTo(new File(getDataFolder() + "/old-config.yml"));

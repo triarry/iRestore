@@ -68,7 +68,7 @@ public class PvPRestorePlayerListener implements Listener {
             else if (player.getKiller() != null) {
             	killer = player.getKiller().getName();
             }
-            else if (playerDamage.getCause() == DamageCause.FIRE && plugin.getConfig().getBoolean("other-events.fire") == true && player.hasPermission("pvprestore.events.fire")) {
+            else if ((playerDamage.getCause() == DamageCause.FIRE || playerDamage.getCause() == DamageCause.FIRE_TICK) && plugin.getConfig().getBoolean("other-events.fire") == true && player.hasPermission("pvprestore.events.fire")) {
             	killer = "Fire";
             }
             else if (playerDamage.getCause() == DamageCause.VOID && plugin.getConfig().getBoolean("other-events.void") == true && player.hasPermission("pvprestore.events.void")) {
@@ -138,7 +138,7 @@ public class PvPRestorePlayerListener implements Listener {
             }
             event.setDroppedExp(0);
             if (plugin.getConfig().getBoolean("death-message")) {
-                event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer + ChatColor.GREEN + ", and their XP and inventory was saved!");
+                event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer + ChatColor.GREEN + "!");
             }
             ItemStack[] content = player.getInventory().getContents();
             ItemStack[] content_armor = player.getInventory().getArmorContents();
@@ -151,9 +151,11 @@ public class PvPRestorePlayerListener implements Listener {
             else if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
                 dropWhitelist(event);
             }
+            /*
             if (plugin.getConfig().getBoolean("percentage-drop.enabled") == true) {
                 dropPercentage(event);
             }
+            */
             if (plugin.getConfig().getBoolean("percentage-drop.enabled") != true && plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
             	event.getDrops().clear();
             }
@@ -169,7 +171,7 @@ public class PvPRestorePlayerListener implements Listener {
                 }
                 event.setDroppedExp(0);
                 if (plugin.getConfig().getBoolean("death-message")) {
-                    event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer + ChatColor.GREEN + ", and their XP and inventory was saved!");
+                    event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer + ChatColor.GREEN + "!");
                 }
                 ItemStack[] content = player.getInventory().getContents();
                 ItemStack[] content_armor = player.getInventory().getArmorContents();
@@ -182,9 +184,11 @@ public class PvPRestorePlayerListener implements Listener {
                 else if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
                     dropWhitelist(event);
                 }
+                /*
                 if (plugin.getConfig().getBoolean("percentage-drop.enabled") == true) {
                     dropPercentage(event);
                 }
+                */
                 if (plugin.getConfig().getBoolean("percentage-drop.enabled") != true && plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
                 	event.getDrops().clear();
                 }
@@ -199,7 +203,7 @@ public class PvPRestorePlayerListener implements Listener {
                 }
                 player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so " + (100 - plugin.getConfig().getInt("xp-to-remove")) + "% of your XP has been saved.");
                 if (plugin.getConfig().getBoolean("death-message")) {
-                    event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer + ChatColor.GREEN + ", and their XP was saved!");
+                    event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer + ChatColor.GREEN + "!");
                 }
                 event.setDroppedExp(0);
             }
@@ -216,7 +220,7 @@ public class PvPRestorePlayerListener implements Listener {
                 player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory and " + (100 - plugin.getConfig().getInt("xp-to-remove")) + "% of your XP has been saved.");
                 event.setDroppedExp(0);
                 if (plugin.getConfig().getBoolean("death-message")) {
-                    event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer + ChatColor.GREEN + ", and their XP and inventory was saved!");
+                    event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer + ChatColor.GREEN + "!");
                 }
                 ItemStack[] content = player.getInventory().getContents();
                 ItemStack[] content_armor = player.getInventory().getArmorContents();
@@ -229,9 +233,11 @@ public class PvPRestorePlayerListener implements Listener {
                 else if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
                     dropWhitelist(event);
                 }
+                /*
                 if (plugin.getConfig().getBoolean("percentage-drop.enabled") == true) {
                     dropPercentage(event);
                 }
+                */
                 if (plugin.getConfig().getBoolean("percentage-drop.enabled") != true && plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
                 	event.getDrops().clear();
                 }
@@ -239,7 +245,7 @@ public class PvPRestorePlayerListener implements Listener {
             else {
                 player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory has been saved.");
                 if (plugin.getConfig().getBoolean("death-message")) {
-                    event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer + ChatColor.GREEN + ", and their inventory was saved!");
+                    event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer + ChatColor.GREEN + "!");
                 }
                 if (player.hasPermission("pvprestore.money.steal") && plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
                     moneySteal(event);
@@ -255,9 +261,11 @@ public class PvPRestorePlayerListener implements Listener {
                 else if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
                     dropWhitelist(event);
                 }
+                /*
                 if (plugin.getConfig().getBoolean("percentage-drop.enabled") == true) {
                     dropPercentage(event);
                 }
+                */
                 if (plugin.getConfig().getBoolean("percentage-drop.enabled") != true && plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
                 	event.getDrops().clear();
                 }
@@ -383,7 +391,7 @@ public class PvPRestorePlayerListener implements Listener {
 			}
 		}
 	}
-	
+	/*
 	public void dropPercentage(PlayerDeathEvent event) {
 		Iterator<ItemStack> iterator = event.getDrops().iterator();
 		Double percentage = (plugin.getConfig().getInt("percentage-drop.percentage") / 100.0);
@@ -395,4 +403,5 @@ public class PvPRestorePlayerListener implements Listener {
 			i++;
 		}	
 	}
+	*/
 }
