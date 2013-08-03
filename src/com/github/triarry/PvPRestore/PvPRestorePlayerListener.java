@@ -151,11 +151,9 @@ public class PvPRestorePlayerListener implements Listener {
             else if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
                 dropWhitelist(event);
             }
-            /*
             if (plugin.getConfig().getBoolean("percentage-drop.enabled") == true) {
                 dropPercentage(event);
             }
-            */
             if (plugin.getConfig().getBoolean("percentage-drop.enabled") != true && plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
             	event.getDrops().clear();
             }
@@ -184,11 +182,9 @@ public class PvPRestorePlayerListener implements Listener {
                 else if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
                     dropWhitelist(event);
                 }
-                /*
                 if (plugin.getConfig().getBoolean("percentage-drop.enabled") == true) {
                     dropPercentage(event);
                 }
-                */
                 if (plugin.getConfig().getBoolean("percentage-drop.enabled") != true && plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
                 	event.getDrops().clear();
                 }
@@ -233,11 +229,9 @@ public class PvPRestorePlayerListener implements Listener {
                 else if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
                     dropWhitelist(event);
                 }
-                /*
                 if (plugin.getConfig().getBoolean("percentage-drop.enabled") == true) {
                     dropPercentage(event);
                 }
-                */
                 if (plugin.getConfig().getBoolean("percentage-drop.enabled") != true && plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
                 	event.getDrops().clear();
                 }
@@ -261,11 +255,9 @@ public class PvPRestorePlayerListener implements Listener {
                 else if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
                     dropWhitelist(event);
                 }
-                /*
                 if (plugin.getConfig().getBoolean("percentage-drop.enabled") == true) {
                     dropPercentage(event);
                 }
-                */
                 if (plugin.getConfig().getBoolean("percentage-drop.enabled") != true && plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
                 	event.getDrops().clear();
                 }
@@ -391,7 +383,6 @@ public class PvPRestorePlayerListener implements Listener {
 			}
 		}
 	}
-	/*
 	public void dropPercentage(PlayerDeathEvent event) {
 		Iterator<ItemStack> iterator = event.getDrops().iterator();
 		Double percentage = (plugin.getConfig().getInt("percentage-drop.percentage") / 100.0);
@@ -399,9 +390,9 @@ public class PvPRestorePlayerListener implements Listener {
 		Integer dropModifier = (int) (percentage * event.getDrops().size());
 		System.out.println(dropModifier);
 		while (i < dropModifier && iterator.hasNext()) {
+			iterator.next();
 			iterator.remove();
 			i++;
 		}	
 	}
-	*/
 }
