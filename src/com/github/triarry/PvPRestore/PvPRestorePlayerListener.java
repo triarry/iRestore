@@ -2,11 +2,13 @@ package com.github.triarry.PvPRestore;
 
 import de.Keyle.MyPet.entity.types.CraftMyPet;
 import de.Keyle.MyPet.entity.types.MyPet;
+import de.Keyle.MyPet.skill.skills.implementation.ranged.MyPetProjectile;
 
 import com.github.triarry.PvPRestore.utilities.Utilities;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,8 +23,10 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 public class PvPRestorePlayerListener implements Listener {
 	
@@ -30,6 +34,8 @@ public class PvPRestorePlayerListener implements Listener {
 	 
 	public HashMap<Player , ItemStack[]> items = new HashMap<Player , ItemStack[]>();
 	public HashMap<Player , ItemStack[]> armor = new HashMap<Player , ItemStack[]>();
+	
+	public List<ItemStack> itemsToBeRemoved = new ArrayList<ItemStack>();
 
     public PvPRestorePlayerListener(PvPRestore plugin) {
         this.plugin = plugin;
@@ -52,76 +58,73 @@ public class PvPRestorePlayerListener implements Listener {
 
         if(player.getLastDamageCause() instanceof EntityDamageByEntityEvent) {
             EntityDamageByEntityEvent lastDamageEvent = (EntityDamageByEntityEvent) player.getLastDamageCause();
-            if(!player.hasPermission("pvprestore.participate")) {
+            if(!player.hasPermission("pvprestore.participate"))
             	return;
-            }
-            else if(lastDamageEvent.getDamager() instanceof Player) {
-                killer = player.getKiller().getName();
-            }
-            else if (lastDamageEvent.getDamager() instanceof TNTPrimed && plugin.getConfig().getBoolean("other-events.tnt") == true && player.hasPermission("pvprestore.events.tnt")) {
-            	killer = "TNT";
+            else if(PvPRestore.myPetEnabled && lastDamageEvent.getCause() == DamageCause.PROJECTILE && plugin.getConfig().getBoolean("my-pet-enabled") == true) {
+            	Projectile a = (Projectile) lastDamageEvent.getDamager();
+            	if(a.getShooter() instanceof CraftMyPet) {
+            		MyPet myPet = ((CraftMyPet) a.getShooter()).getMyPet();
+            		killer = myPet.getOwner().getName() + "'s pet " + myPet.getPetName();
+            	}
+            	else 
+            		return;
             }
             else if(PvPRestore.myPetEnabled && lastDamageEvent.getDamager() instanceof CraftMyPet && plugin.getConfig().getBoolean("my-pet-enabled") == true) {
                 MyPet myPet = ((CraftMyPet) lastDamageEvent.getDamager()).getMyPet();
-                killer = myPet.getOwner().getName() + "'s pet " + myPet.petName;
+                killer = myPet.getOwner().getName() + "'s pet " + myPet.getPetName();
             }
-            else if (player.getKiller() != null) {
+            else if(PvPRestore.myPetEnabled && lastDamageEvent.getDamager() instanceof MyPetProjectile && plugin.getConfig().getBoolean("my-pet-enabled") == true) {
+                MyPet myPet = ((CraftMyPet) lastDamageEvent.getDamager()).getMyPet();
+                killer = myPet.getOwner().getName() + "'s pet " + myPet.getPetName();
+            }
+            else if(lastDamageEvent.getDamager() instanceof Player)
+                killer = player.getKiller().getName();
+            else if (lastDamageEvent.getDamager() instanceof TNTPrimed && plugin.getConfig().getBoolean("other-events.tnt") == true && player.hasPermission("pvprestore.events.tnt"))
+            	killer = "TNT";
+            else if (player.getKiller() != null) 
             	killer = player.getKiller().getName();
-            }
-            else if ((playerDamage.getCause() == DamageCause.FIRE || playerDamage.getCause() == DamageCause.FIRE_TICK) && plugin.getConfig().getBoolean("other-events.fire") == true && player.hasPermission("pvprestore.events.fire")) {
+            else if ((playerDamage.getCause() == DamageCause.FIRE || playerDamage.getCause() == DamageCause.FIRE_TICK) && plugin.getConfig().getBoolean("other-events.fire") == true && player.hasPermission("pvprestore.events.fire")) 
             	killer = "Fire";
-            }
-            else if (playerDamage.getCause() == DamageCause.VOID && plugin.getConfig().getBoolean("other-events.void") == true && player.hasPermission("pvprestore.events.void")) {
+            else if (playerDamage.getCause() == DamageCause.VOID && plugin.getConfig().getBoolean("other-events.void") == true && player.hasPermission("pvprestore.events.void")) 
             	killer = "The Void";
-            }
-            else if (playerDamage.getCause() == DamageCause.LAVA && plugin.getConfig().getBoolean("other-events.lava") == true && player.hasPermission("pvprestore.events.lava")) {
+            else if (playerDamage.getCause() == DamageCause.LAVA && plugin.getConfig().getBoolean("other-events.lava") == true && player.hasPermission("pvprestore.events.lava")) 
             	killer = "Lava";
-            }
-            else if (playerDamage.getCause() == DamageCause.CONTACT && plugin.getConfig().getBoolean("other-events.cactus") == true && player.hasPermission("pvprestore.events.cactus")) {
+            else if (playerDamage.getCause() == DamageCause.CONTACT && plugin.getConfig().getBoolean("other-events.cactus") == true && player.hasPermission("pvprestore.events.cactus")) 
             	killer = "A Cactus";
-            }
-            else if (playerDamage.getCause() == DamageCause.DROWNING && plugin.getConfig().getBoolean("other-events.drowning") == true && player.hasPermission("pvprestore.events.drowning")) {
+            else if (playerDamage.getCause() == DamageCause.DROWNING && plugin.getConfig().getBoolean("other-events.drowning") == true && player.hasPermission("pvprestore.events.drowning")) 
             	killer = "The Water";
-            }
-            else if (playerDamage.getCause() == DamageCause.STARVATION && plugin.getConfig().getBoolean("other-events.starvation") == true && player.hasPermission("pvprestore.events.starvation")) {
+            else if (playerDamage.getCause() == DamageCause.STARVATION && plugin.getConfig().getBoolean("other-events.starvation") == true && player.hasPermission("pvprestore.events.starvation")) 
             	killer = "Their Lack of Food";
-            }
-            else if (playerDamage.getCause() == DamageCause.SUFFOCATION && plugin.getConfig().getBoolean("other-events.suffocation") == true && player.hasPermission("pvprestore.events.suffocation")) {
+            else if (playerDamage.getCause() == DamageCause.SUFFOCATION && plugin.getConfig().getBoolean("other-events.suffocation") == true && player.hasPermission("pvprestore.events.suffocation")) 
             	killer = "Their Lack of Air";
-            }
+            else if (playerDamage.getCause() == DamageCause.FALL && plugin.getConfig().getBoolean("other-events.falling") == true && player.hasPermission("pvprestore.events.falling")) 
+            	killer = "Breaking their legs";
             else {
                 player.sendMessage(ChatColor.RED + "Your death was not player related, so your inventory and XP have dropped where you died.");
                 return;
             }
         }
         // This is so that if the player is killed by the environment as an effect of another player, it STILL counts. - triarry
-	    else if(!player.hasPermission("pvprestore.participate")) {
+	    else if(!player.hasPermission("pvprestore.participate")) 
 	    	return;
-	    }
-        else if ((playerDamage.getCause() == DamageCause.FIRE || playerDamage.getCause() == DamageCause.FIRE_TICK) && plugin.getConfig().getBoolean("other-events.fire") == true && player.hasPermission("pvprestore.events.fire")) {
+        else if ((playerDamage.getCause() == DamageCause.FIRE || playerDamage.getCause() == DamageCause.FIRE_TICK) && plugin.getConfig().getBoolean("other-events.fire") == true && player.hasPermission("pvprestore.events.fire")) 
         	killer = "Fire";
-        }
-        else if (playerDamage.getCause() == DamageCause.VOID && plugin.getConfig().getBoolean("other-events.void") == true && player.hasPermission("pvprestore.events.void")) {
+        else if (playerDamage.getCause() == DamageCause.VOID && plugin.getConfig().getBoolean("other-events.void") == true && player.hasPermission("pvprestore.events.void"))
         	killer = "The Void";
-        }
-        else if (playerDamage.getCause() == DamageCause.LAVA && plugin.getConfig().getBoolean("other-events.lava") == true && player.hasPermission("pvprestore.events.lava")) {
+        else if (playerDamage.getCause() == DamageCause.LAVA && plugin.getConfig().getBoolean("other-events.lava") == true && player.hasPermission("pvprestore.events.lava"))
         	killer = "Lava";
-        }
-        else if (playerDamage.getCause() == DamageCause.CONTACT && plugin.getConfig().getBoolean("other-events.cactus") == true && player.hasPermission("pvprestore.events.cactus")) {
+        else if (playerDamage.getCause() == DamageCause.CONTACT && plugin.getConfig().getBoolean("other-events.cactus") == true && player.hasPermission("pvprestore.events.cactus"))
         	killer = "A Cactus";
-        }
-        else if (playerDamage.getCause() == DamageCause.DROWNING && plugin.getConfig().getBoolean("other-events.drowning") == true && player.hasPermission("pvprestore.events.drowning")) {
+        else if (playerDamage.getCause() == DamageCause.DROWNING && plugin.getConfig().getBoolean("other-events.drowning") == true && player.hasPermission("pvprestore.events.drowning"))
         	killer = "The Water";
-        }
-        else if (playerDamage.getCause() == DamageCause.STARVATION && plugin.getConfig().getBoolean("other-events.starvation") == true && player.hasPermission("pvprestore.events.starvation")) {
+        else if (playerDamage.getCause() == DamageCause.STARVATION && plugin.getConfig().getBoolean("other-events.starvation") == true && player.hasPermission("pvprestore.events.starvation"))
         	killer = "Their Lack of Food";
-        }
-        else if (playerDamage.getCause() == DamageCause.SUFFOCATION && plugin.getConfig().getBoolean("other-events.suffocation") == true && player.hasPermission("pvprestore.events.suffocation")) {
+        else if (playerDamage.getCause() == DamageCause.SUFFOCATION && plugin.getConfig().getBoolean("other-events.suffocation") == true && player.hasPermission("pvprestore.events.suffocation"))
         	killer = "Their Lack of Air";
-        }
-        else if (player.getKiller() != null) {
+        else if (playerDamage.getCause() == DamageCause.FALL && plugin.getConfig().getBoolean("other-events.falling") == true && player.hasPermission("pvprestore.events.falling"))
+        	killer = "Breaking their legs";
+        else if (player.getKiller() != null) 
         	killer = player.getKiller().getName();
-        }
         else {
             player.sendMessage(ChatColor.RED + "Your death was not player related, so your inventory and XP have dropped where you died.");
             return;
@@ -183,7 +186,7 @@ public class PvPRestorePlayerListener implements Listener {
                     dropWhitelist(event);
                 }
                 if (plugin.getConfig().getBoolean("percentage-drop.enabled") == true) {
-                    dropPercentage(event);
+                   dropPercentage(event);
                 }
                 if (plugin.getConfig().getBoolean("percentage-drop.enabled") != true && plugin.getConfig().getBoolean("whitelist.enabled") != true && plugin.getConfig().getBoolean("blacklist.enabled") != true) {
                 	event.getDrops().clear();
@@ -272,22 +275,22 @@ public class PvPRestorePlayerListener implements Listener {
             p.getInventory().clear();
             p.getInventory().setContents(items.get(p));
             items.remove(p);
-            if (plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+            if (plugin.getConfig().getBoolean("blacklist.enabled") == true)
             	Utilities.getUtilities().blacklistItems(p);
-            }
-            if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+            if (plugin.getConfig().getBoolean("whitelist.enabled") == true)
             	Utilities.getUtilities().whitelistItems(p);
-            }
+            if (plugin.getConfig().getBoolean("percentage-drop.enabled") == true)
+            	Utilities.getUtilities().dropPercentageRemove(p, itemsToBeRemoved);
         }
         if (armor.containsKey(event.getPlayer()) && armor.size() != 0) {
             p.getInventory().setArmorContents(armor.get(p));
             armor.remove(p);
-            if (plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+            if (plugin.getConfig().getBoolean("blacklist.enabled") == true) 
             	Utilities.getUtilities().blacklistItems(p);
-            }
-            if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+            if (plugin.getConfig().getBoolean("whitelist.enabled") == true) 
             	Utilities.getUtilities().whitelistArmor(p);
-            }
+            if (plugin.getConfig().getBoolean("percentage-drop.enabled") == true)
+            	Utilities.getUtilities().dropPercentageRemove(p, itemsToBeRemoved);
         }
 	}
 
@@ -299,22 +302,22 @@ public class PvPRestorePlayerListener implements Listener {
 	            p.getInventory().clear();
 	            p.getInventory().setContents(items.get(p));
 	            items.remove(p);
-	            if (plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+	            if (plugin.getConfig().getBoolean("blacklist.enabled") == true) 
 	            	Utilities.getUtilities().blacklistItems(p);
-	            }
-	            if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+	            if (plugin.getConfig().getBoolean("whitelist.enabled") == true) 
 	            	Utilities.getUtilities().whitelistItems(p);
-	            }
+	            if (plugin.getConfig().getBoolean("percentage-drop.enabled") == true)
+	            	Utilities.getUtilities().dropPercentageRemove(p, itemsToBeRemoved);
 	        }
 	        if (armor.containsKey(p) && armor.size() != 0) {
 	            p.getInventory().setArmorContents(armor.get(p));
 	            armor.remove(p);
-	            if (plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+	            if (plugin.getConfig().getBoolean("blacklist.enabled") == true) 
 	            	Utilities.getUtilities().blacklistItems(p);
-	            }
-	            if (plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+	            if (plugin.getConfig().getBoolean("whitelist.enabled") == true) 
 	            	Utilities.getUtilities().whitelistArmor(p);
-	            }
+	            if (plugin.getConfig().getBoolean("percentage-drop.enabled") == true)
+	            	Utilities.getUtilities().dropPercentageRemove(p, itemsToBeRemoved);
 	        }
 		}
 	}
@@ -327,22 +330,22 @@ public class PvPRestorePlayerListener implements Listener {
 	            p.getInventory().clear();
 	            p.getInventory().setContents(items.get(p));
 	            items.remove(p);
-	            if (p.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+	            if (plugin.getConfig().getBoolean("blacklist.enabled") == true) 
 	            	Utilities.getUtilities().blacklistItems(p);
-	            }
-	            if (p.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+	            if (plugin.getConfig().getBoolean("whitelist.enabled") == true) 
 	            	Utilities.getUtilities().whitelistItems(p);
-	            }
+	            if (plugin.getConfig().getBoolean("percentage-drop.enabled") == true)
+	            	Utilities.getUtilities().dropPercentageRemove(p, itemsToBeRemoved);
 	        }
 	        if (armor.containsKey(event.getPlayer()) && armor.size() != 0) {
 	            p.getInventory().setArmorContents(armor.get(p));
 	            armor.remove(p);
-	            if (p.hasPermission("pvprestore.blacklist.drop") && plugin.getConfig().getBoolean("blacklist.enabled") == true) {
+	            if (plugin.getConfig().getBoolean("blacklist.enabled") == true) 
 	            	Utilities.getUtilities().blacklistItems(p);
-	            }
-	            if (p.hasPermission("pvprestore.whitelist.drop") && plugin.getConfig().getBoolean("whitelist.enabled") == true) {
+	            if (plugin.getConfig().getBoolean("whitelist.enabled") == true) 
 	            	Utilities.getUtilities().whitelistArmor(p);
-	            }
+	            if (plugin.getConfig().getBoolean("percentage-drop.enabled") == true)
+	            	Utilities.getUtilities().dropPercentageRemove(p, itemsToBeRemoved);
 	        }
 		}
 	}
@@ -383,16 +386,17 @@ public class PvPRestorePlayerListener implements Listener {
 			}
 		}
 	}
+	
 	public void dropPercentage(PlayerDeathEvent event) {
 		Iterator<ItemStack> iterator = event.getDrops().iterator();
 		Double percentage = (plugin.getConfig().getInt("percentage-drop.percentage") / 100.0);
 		Integer i = 0;
 		Integer dropModifier = (int) (percentage * event.getDrops().size());
-		System.out.println(dropModifier);
 		while (i < dropModifier && iterator.hasNext()) {
-			iterator.next();
+			ItemStack stackToRemove = iterator.next();
+			itemsToBeRemoved.add(stackToRemove);
 			iterator.remove();
 			i++;
-		}	
+		}
 	}
 }

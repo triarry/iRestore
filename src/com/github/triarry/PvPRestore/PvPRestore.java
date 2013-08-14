@@ -23,8 +23,8 @@ public class PvPRestore extends JavaPlugin {
     FileConfiguration config;
     
     public static Economy econ = null;
-    
     public static boolean myPetEnabled = false;
+    public static boolean playerHeadsEnabled = false;
     
     public static boolean update = false;
     public static String ver = "";
@@ -49,20 +49,20 @@ public class PvPRestore extends JavaPlugin {
 	    }
 	    config = new YamlConfiguration();
 	    loadYamls();
-	    if (getConfig().getDouble("version") != 1.8) {
+	    if (getConfig().getDouble("version") != 1.9) {
 	    	this.getLogger().info("Your config is out of date. Regenerating...");
             configFile.setWritable(true);
             configFile.renameTo(new File(getDataFolder() + "/old-config.yml"));
 	    	reConfig();
 	    }
 	    getCommand("pvprestore").setExecutor(new PvPRestoreCommandExecutor(this));
-        if (!setupEconomy() ) {
+        if (!setupEconomy())
             this.getLogger().info("No Vault dependency found! (iConomy, BOSEconomy, etc.)");
-        }
         if (getConfig().getBoolean("my-pet-enabled")) {
-            if (!setupMyPet() ) {
+            if (!setupMyPet())
                 this.getLogger().info("MyPet not found! Disabling MyPet stuff.");
-            }
+            else
+            	this.getLogger().info("PvPRestore has hooked into MyPet!");
         }
 		if(getConfig().getBoolean("check-for-updates") == true) {
 			Updater updater = new Updater(this, "pvp-restore", this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
@@ -75,17 +75,15 @@ public class PvPRestore extends JavaPlugin {
 		if (update == true) {
 			this.getLogger().info("You have an update waiting for you! (dev.bukkit.org/server-mods/pvp-restore/)");
 		}
-		
 	}
-	@Override
-	public void onDisable() {
-	}
+	
 	private void firstRun() throws Exception {
 	    if(!configFile.exists()){
 	        configFile.getParentFile().mkdirs();
 	        copy(getResource("config.yml"), configFile);
 	    }
 	}
+	
 	private void reConfig() {
         configFile.getParentFile().mkdirs();
         copy(getResource("config.yml"), configFile);
@@ -102,6 +100,7 @@ public class PvPRestore extends JavaPlugin {
         econ = rsp.getProvider();
         return econ != null;
     }
+    
     private boolean setupMyPet() {
         if (getServer().getPluginManager().isPluginEnabled("MyPet")) {
             myPetEnabled = true;
@@ -109,6 +108,7 @@ public class PvPRestore extends JavaPlugin {
         }
         return false;
     }
+    
 	private void copy(InputStream in, File file) {
 	    try {
 	        OutputStream out = new FileOutputStream(file);
@@ -123,6 +123,7 @@ public class PvPRestore extends JavaPlugin {
 	        e.printStackTrace();
 	    }
 	}
+	
 	public void saveYamls() {
 	    try {
 	        config.save(configFile);
@@ -130,6 +131,7 @@ public class PvPRestore extends JavaPlugin {
 	        e.printStackTrace();
 	    }
 	}
+	
 	public void loadYamls() {
 	    try {
 	        config.load(configFile);

@@ -1,5 +1,7 @@
 package com.github.triarry.PvPRestore.utilities;
 
+import java.util.List;
+
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -68,6 +70,7 @@ public class Utilities {
 			} 
 		}
 	}
+	
 	public void whitelistArmor(Player p) {
 		Boolean helmetCheck = false;
 		Boolean chestplateCheck = false;
@@ -119,5 +122,31 @@ public class Utilities {
 				p.getInventory().setBoots(null);
 			}
 		}
+	}
+	
+	public void dropPercentageRemove(Player p, List<ItemStack> i) {
+		for (ItemStack itemList : i) {
+			p.getInventory().remove(itemList);
+			if(p.getInventory().getHelmet() != null) {
+			    if(p.getInventory().getHelmet() == itemList) {
+			    	p.getInventory().setHelmet(null);
+			    }
+			}
+			if(p.getInventory().getChestplate() != null) {
+			    if(p.getInventory().getChestplate() == itemList) {
+			    	p.getInventory().setChestplate(null);
+			    }
+			}
+			if(p.getInventory().getLeggings() != null) {
+			    if(p.getInventory().getLeggings() == itemList) {
+			    	p.getInventory().setLeggings(null);
+			    }
+			}
+			if(p.getInventory().getBoots() != null) {
+			    if(p.getInventory().getBoots() == itemList) {
+			    	p.getInventory().setBoots(null);
+			    }
+			}
+		} 
 	}
 }

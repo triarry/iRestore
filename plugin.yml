@@ -1,6 +1,6 @@
 name: PvP Restore
 main: com.github.triarry.PvPRestore.PvPRestore
-version: 1.4.4
+version: 1.4.5
 author: triarry
 softdepend: [Vault, MyPet]
 commands:
@@ -55,4 +55,7 @@ permissions:
         default: true
     pvprestore.events.suffocation:
         description: Allows a player's inventory to be saved by suffocating
+        default: true
+    pvprestore.events.falling:
+        description: Allows a player's inventory to be saved by falling damage
         default: true

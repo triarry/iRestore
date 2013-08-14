@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 
 public class PvPRestoreCommandExecutor implements CommandExecutor {
 
+	@SuppressWarnings("unused")
 	private PvPRestore plugin;
 	  
 	public PvPRestoreCommandExecutor(PvPRestore plugin){ 
