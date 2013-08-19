@@ -17,7 +17,7 @@ public class PvPRestoreCommandExecutor implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("pvprestore")) {
 			sender.sendMessage(ChatColor.LIGHT_PURPLE + "#####");
-			sender.sendMessage(ChatColor.GREEN + "Currently running PvP Restore version 1.4.5");
+			sender.sendMessage(ChatColor.GREEN + "Currently running PvP Restore version 1.4.6");
 			sender.sendMessage(ChatColor.GREEN + "Plugin made by triarry");
 			sender.sendMessage(ChatColor.LIGHT_PURPLE + "#####");
 			return true;

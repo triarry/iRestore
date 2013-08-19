@@ -66,7 +66,9 @@ public class PvPRestorePlayerListener implements Listener {
             		MyPet myPet = ((CraftMyPet) a.getShooter()).getMyPet();
             		killer = myPet.getOwner().getName() + "'s pet " + myPet.getPetName();
             	}
-            	else 
+            	else if(a.getShooter() instanceof Player) 
+            		killer = a.getShooter().getCustomName();
+            	else
             		return;
             }
             else if(PvPRestore.myPetEnabled && lastDamageEvent.getDamager() instanceof CraftMyPet && plugin.getConfig().getBoolean("my-pet-enabled") == true) {

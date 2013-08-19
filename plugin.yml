@@ -1,6 +1,6 @@
 name: PvP Restore
 main: com.github.triarry.PvPRestore.PvPRestore
-version: 1.4.5
+version: 1.4.6
 author: triarry
 softdepend: [Vault, MyPet]
 commands:
