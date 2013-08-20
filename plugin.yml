@@ -40,6 +40,7 @@ permissions:
             irestore.events.other.starvation: true
             irestore.events.other.suffocation: true
             irestore.events.other.falling: true
+            irestore.events.other.magic: true
     irestore.events.other.tnt:
         description: Allows a player's inventory to be saved by a TNT death         
     irestore.events.other.fire:
@@ -58,6 +59,8 @@ permissions:
         description: Allows a player's inventory to be saved by suffocating
     irestore.events.other.falling:
         description: Allows a player's inventory to be saved by falling damage
+    irestore.events.other.magic:
+        description: Allows a player's inventory to be saved by a magical death (potion effects)
     irestore.events.pvp.all:
         description: Allows a player's inventory to be saved by all "pvp related" events.
         default: false
