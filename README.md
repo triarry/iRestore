@@ -1,1 +1,1 @@
-### https://github.com/triarry/PvPRestore/wiki/Configuration
+### https://github.com/triarry/iRestore/wiki/Configuration
