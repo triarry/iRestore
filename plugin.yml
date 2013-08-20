@@ -1,10 +1,10 @@
-name: PvP Restore
-main: com.github.triarry.PvPRestore.PvPRestore
-version: 1.4.5
+name: iRestore
+main: com.github.triarry.iRestore.iRestore
+version: 1.4.6
 author: triarry
 softdepend: [Vault, MyPet]
 commands:
-    pvprestore:
+    irestore:
         description: Tells the player information about this plugin.
         usage: /<command>
 permissions:
