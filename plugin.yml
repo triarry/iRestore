@@ -1,61 +1,61 @@
-name: PvP Restore
-main: com.github.triarry.PvPRestore.PvPRestore
-version: 1.4.7
+name: iRestore
+main: com.github.triarry.iRestore.iRestore
+version: 1.4.6
 author: triarry
 softdepend: [Vault, MyPet]
 commands:
-    pvprestore:
+    irestore:
         description: Tells the player information about this plugin.
         usage: /<command>
 permissions:
-    pvprestore.participate:
+    irestore.participate:
         description: Required for players to actively participate in features of the plugin.
         default: true
-    pvprestore.update:
+    irestore.update:
         description: Tells the player if an update is available.
         default: op
-    pvprestore.info:
+    irestore.info:
         description: Tells the player information about this plugin.
         default: true
-    pvprestore.keep:
+    irestore.keep:
         description: Allows the player to keep all their items, armor and XP.
         default: true
-    pvprestore.keep.xp:
+    irestore.keep.xp:
         description: Allows the player to keep their XP.
         default: true
-    pvprestore.keep.inventory:
+    irestore.keep.inventory:
         description: Allows the player to keep all their items and armor.
         default: true
-    pvprestore.money.steal:
+    irestore.money.steal:
         description: Allows a player to steal another players money
         default: true
-    pvprestore.money.exempt:
+    irestore.money.exempt:
         description: Overrides another player's ability to steal your money
         default: op
-    pvprestore.events.tnt:
+    irestore.events.tnt:
         description: Allows a player's inventory to be saved by a TNT death
         default: true
-    pvprestore.events.fire:
+    irestore.events.fire:
         description: Allows a player's inventory to be saved by a fire death
         default: true
-    pvprestore.events.void:
+    irestore.events.void:
         description: Allows a player's inventory to be saved by a void death
         default: true
-    pvprestore.events.lava:
+    irestore.events.lava:
         description: Allows a player's inventory to be saved by a lava death
         default: true
-    pvprestore.events.cactus:
+    irestore.events.cactus:
         description: Allows a player's inventory to be saved by a cactus death
         default: true
-    pvprestore.events.drowning:
+    irestore.events.drowning:
         description: Allows a player's inventory to be saved by drowning
         default: true
-    pvprestore.events.starvation:
+    irestore.events.starvation:
         description: Allows a player's inventory to be saved by starving
         default: true
-    pvprestore.events.suffocation:
+    irestore.events.suffocation:
         description: Allows a player's inventory to be saved by suffocating
         default: true
-    pvprestore.events.falling:
+    irestore.events.falling:
         description: Allows a player's inventory to be saved by falling damage
         default: true

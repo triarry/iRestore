@@ -1,22 +1,22 @@
-package com.github.triarry.PvPRestore.utilities;
+package com.github.triarry.iRestore.utilities;
 
 import java.util.List;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import com.github.triarry.PvPRestore.PvPRestore;
+import com.github.triarry.iRestore.iRestore;
 
 public class Utilities {
 	
-	private PvPRestore plugin;
+	private iRestore plugin;
 	static Utilities instance = new Utilities();
 	
     public static Utilities getUtilities() {
         return instance;
     }
   
-    public void startUp(PvPRestore plug) {
+    public void startUp(iRestore plug) {
         plugin = plug;
     }
     

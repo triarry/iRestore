@@ -1,4 +1,4 @@
-package com.github.triarry.PvPRestore;
+package com.github.triarry.iRestore;
 
 import net.milkbowl.vault.economy.Economy;
 
@@ -8,16 +8,16 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.github.triarry.PvPRestore.metrics.Metrics;
-import com.github.triarry.PvPRestore.utilities.Updater;
-import com.github.triarry.PvPRestore.utilities.Updater.UpdateResult;
-import com.github.triarry.PvPRestore.utilities.Utilities;
+import com.github.triarry.iRestore.metrics.Metrics;
+import com.github.triarry.iRestore.utilities.Updater;
+import com.github.triarry.iRestore.utilities.Utilities;
+import com.github.triarry.iRestore.utilities.Updater.UpdateResult;
 
 import java.io.*;
 
-public class PvPRestore extends JavaPlugin {
+public class iRestore extends JavaPlugin {
 	
-	public final PvPRestorePlayerListener playerListener = new PvPRestorePlayerListener(this);
+	public final iRestorePlayerListener playerListener = new iRestorePlayerListener(this);
 	
     File configFile;
     FileConfiguration config;
@@ -55,17 +55,17 @@ public class PvPRestore extends JavaPlugin {
             configFile.renameTo(new File(getDataFolder() + "/old-config.yml"));
 	    	reConfig();
 	    }
-	    getCommand("pvprestore").setExecutor(new PvPRestoreCommandExecutor(this));
+	    getCommand("irestore").setExecutor(new iRestoreCommandExecutor(this));
         if (!setupEconomy())
             this.getLogger().info("No Vault dependency found! (iConomy, BOSEconomy, etc.)");
         if (getConfig().getBoolean("my-pet-enabled")) {
             if (!setupMyPet())
                 this.getLogger().info("MyPet not found! Disabling MyPet stuff.");
             else
-            	this.getLogger().info("PvPRestore has hooked into MyPet!");
+            	this.getLogger().info("iRestore has hooked into MyPet!");
         }
 		if(getConfig().getBoolean("check-for-updates") == true) {
-			Updater updater = new Updater(this, "pvp-restore", this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
+			Updater updater = new Updater(this, "irestore", this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
 			updater.getResult();
 			if(updater.getResult() == UpdateResult.UPDATE_AVAILABLE) {
 				update = true;
@@ -73,7 +73,7 @@ public class PvPRestore extends JavaPlugin {
 			ver = updater.getLatestVersionString();
 		}
 		if (update == true) {
-			this.getLogger().info("You have an update waiting for you! (dev.bukkit.org/server-mods/pvp-restore/)");
+			this.getLogger().info("You have an update waiting for you! (dev.bukkit.org/server-mods/irestore/)");
 		}
 	}
 	
