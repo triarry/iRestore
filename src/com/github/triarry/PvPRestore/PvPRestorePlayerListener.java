@@ -1,10 +1,10 @@
-package com.github.triarry.iRestore;
+package com.github.triarry.PvPRestore;
 
 import de.Keyle.MyPet.entity.types.CraftMyPet;
 import de.Keyle.MyPet.entity.types.MyPet;
 import de.Keyle.MyPet.skill.skills.implementation.ranged.MyPetProjectile;
 
-import com.github.triarry.iRestore.utilities.Utilities;
+import com.github.triarry.PvPRestore.utilities.Utilities;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -28,24 +28,24 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-public class iRestorePlayerListener implements Listener {
+public class PvPRestorePlayerListener implements Listener {
 	
-	private iRestore plugin;
+	private PvPRestore plugin;
 	 
 	public HashMap<Player , ItemStack[]> items = new HashMap<Player , ItemStack[]>();
 	public HashMap<Player , ItemStack[]> armor = new HashMap<Player , ItemStack[]>();
 	
 	public List<ItemStack> itemsToBeRemoved = new ArrayList<ItemStack>();
 
-    public iRestorePlayerListener(iRestore plugin) {
+    public PvPRestorePlayerListener(PvPRestore plugin) {
         this.plugin = plugin;
     }
     
 	@EventHandler
 	public void informAdmins(PlayerJoinEvent event) {
 		Player p = event.getPlayer();
-		if (iRestore.update == true && p.hasPermission("irestore.update")) {
-			p.sendMessage(ChatColor.GREEN + "An update is available: " + ChatColor.GOLD + iRestore.ver);
+		if (PvPRestore.update == true && p.hasPermission("pvprestore.update")) {
+			p.sendMessage(ChatColor.GREEN + "An update is available: " + ChatColor.GOLD + PvPRestore.ver);
 			p.sendMessage(ChatColor.GREEN + "Download it here: " + ChatColor.GOLD + "http://dev.bukkit.org/server-mods/pvp-restore/");
 		}
 	}
@@ -58,9 +58,9 @@ public class iRestorePlayerListener implements Listener {
 
         if(player.getLastDamageCause() instanceof EntityDamageByEntityEvent) {
             EntityDamageByEntityEvent lastDamageEvent = (EntityDamageByEntityEvent) player.getLastDamageCause();
-            if(!player.hasPermission("irestore.participate"))
+            if(!player.hasPermission("pvprestore.participate"))
             	return;
-            else if(iRestore.myPetEnabled && lastDamageEvent.getCause() == DamageCause.PROJECTILE && plugin.getConfig().getBoolean("my-pet-enabled") == true) {
+            else if(PvPRestore.myPetEnabled && lastDamageEvent.getCause() == DamageCause.PROJECTILE && plugin.getConfig().getBoolean("my-pet-enabled") == true) {
             	Projectile a = (Projectile) lastDamageEvent.getDamager();
             	if(a.getShooter() instanceof CraftMyPet) {
             		MyPet myPet = ((CraftMyPet) a.getShooter()).getMyPet();
@@ -69,35 +69,35 @@ public class iRestorePlayerListener implements Listener {
             	else 
             		return;
             }
-            else if(iRestore.myPetEnabled && lastDamageEvent.getDamager() instanceof CraftMyPet && plugin.getConfig().getBoolean("my-pet-enabled") == true) {
+            else if(PvPRestore.myPetEnabled && lastDamageEvent.getDamager() instanceof CraftMyPet && plugin.getConfig().getBoolean("my-pet-enabled") == true) {
                 MyPet myPet = ((CraftMyPet) lastDamageEvent.getDamager()).getMyPet();
                 killer = myPet.getOwner().getName() + "'s pet " + myPet.getPetName();
             }
-            else if(iRestore.myPetEnabled && lastDamageEvent.getDamager() instanceof MyPetProjectile && plugin.getConfig().getBoolean("my-pet-enabled") == true) {
+            else if(PvPRestore.myPetEnabled && lastDamageEvent.getDamager() instanceof MyPetProjectile && plugin.getConfig().getBoolean("my-pet-enabled") == true) {
                 MyPet myPet = ((CraftMyPet) lastDamageEvent.getDamager()).getMyPet();
                 killer = myPet.getOwner().getName() + "'s pet " + myPet.getPetName();
             }
             else if(lastDamageEvent.getDamager() instanceof Player)
                 killer = player.getKiller().getName();
-            else if (lastDamageEvent.getDamager() instanceof TNTPrimed && plugin.getConfig().getBoolean("other-events.tnt") == true && player.hasPermission("irestore.events.tnt"))
+            else if (lastDamageEvent.getDamager() instanceof TNTPrimed && plugin.getConfig().getBoolean("other-events.tnt") == true && player.hasPermission("pvprestore.events.tnt"))
             	killer = "TNT";
             else if (player.getKiller() != null) 
             	killer = player.getKiller().getName();
-            else if ((playerDamage.getCause() == DamageCause.FIRE || playerDamage.getCause() == DamageCause.FIRE_TICK) && plugin.getConfig().getBoolean("other-events.fire") == true && player.hasPermission("irestore.events.fire")) 
+            else if ((playerDamage.getCause() == DamageCause.FIRE || playerDamage.getCause() == DamageCause.FIRE_TICK) && plugin.getConfig().getBoolean("other-events.fire") == true && player.hasPermission("pvprestore.events.fire")) 
             	killer = "Fire";
-            else if (playerDamage.getCause() == DamageCause.VOID && plugin.getConfig().getBoolean("other-events.void") == true && player.hasPermission("irestore.events.void")) 
+            else if (playerDamage.getCause() == DamageCause.VOID && plugin.getConfig().getBoolean("other-events.void") == true && player.hasPermission("pvprestore.events.void")) 
             	killer = "The Void";
-            else if (playerDamage.getCause() == DamageCause.LAVA && plugin.getConfig().getBoolean("other-events.lava") == true && player.hasPermission("irestore.events.lava")) 
+            else if (playerDamage.getCause() == DamageCause.LAVA && plugin.getConfig().getBoolean("other-events.lava") == true && player.hasPermission("pvprestore.events.lava")) 
             	killer = "Lava";
-            else if (playerDamage.getCause() == DamageCause.CONTACT && plugin.getConfig().getBoolean("other-events.cactus") == true && player.hasPermission("irestore.events.cactus")) 
+            else if (playerDamage.getCause() == DamageCause.CONTACT && plugin.getConfig().getBoolean("other-events.cactus") == true && player.hasPermission("pvprestore.events.cactus")) 
             	killer = "A Cactus";
-            else if (playerDamage.getCause() == DamageCause.DROWNING && plugin.getConfig().getBoolean("other-events.drowning") == true && player.hasPermission("irestore.events.drowning")) 
+            else if (playerDamage.getCause() == DamageCause.DROWNING && plugin.getConfig().getBoolean("other-events.drowning") == true && player.hasPermission("pvprestore.events.drowning")) 
             	killer = "The Water";
-            else if (playerDamage.getCause() == DamageCause.STARVATION && plugin.getConfig().getBoolean("other-events.starvation") == true && player.hasPermission("irestore.events.starvation")) 
+            else if (playerDamage.getCause() == DamageCause.STARVATION && plugin.getConfig().getBoolean("other-events.starvation") == true && player.hasPermission("pvprestore.events.starvation")) 
             	killer = "Their Lack of Food";
-            else if (playerDamage.getCause() == DamageCause.SUFFOCATION && plugin.getConfig().getBoolean("other-events.suffocation") == true && player.hasPermission("irestore.events.suffocation")) 
+            else if (playerDamage.getCause() == DamageCause.SUFFOCATION && plugin.getConfig().getBoolean("other-events.suffocation") == true && player.hasPermission("pvprestore.events.suffocation")) 
             	killer = "Their Lack of Air";
-            else if (playerDamage.getCause() == DamageCause.FALL && plugin.getConfig().getBoolean("other-events.falling") == true && player.hasPermission("irestore.events.falling")) 
+            else if (playerDamage.getCause() == DamageCause.FALL && plugin.getConfig().getBoolean("other-events.falling") == true && player.hasPermission("pvprestore.events.falling")) 
             	killer = "Breaking their legs";
             else {
                 player.sendMessage(ChatColor.RED + "Your death was not player related, so your inventory and XP have dropped where you died.");
@@ -105,23 +105,23 @@ public class iRestorePlayerListener implements Listener {
             }
         }
         // This is so that if the player is killed by the environment as an effect of another player, it STILL counts. - triarry
-	    else if(!player.hasPermission("irestore.participate")) 
+	    else if(!player.hasPermission("pvprestore.participate")) 
 	    	return;
-        else if ((playerDamage.getCause() == DamageCause.FIRE || playerDamage.getCause() == DamageCause.FIRE_TICK) && plugin.getConfig().getBoolean("other-events.fire") == true && player.hasPermission("irestore.events.fire")) 
+        else if ((playerDamage.getCause() == DamageCause.FIRE || playerDamage.getCause() == DamageCause.FIRE_TICK) && plugin.getConfig().getBoolean("other-events.fire") == true && player.hasPermission("pvprestore.events.fire")) 
         	killer = "Fire";
-        else if (playerDamage.getCause() == DamageCause.VOID && plugin.getConfig().getBoolean("other-events.void") == true && player.hasPermission("irestore.events.void"))
+        else if (playerDamage.getCause() == DamageCause.VOID && plugin.getConfig().getBoolean("other-events.void") == true && player.hasPermission("pvprestore.events.void"))
         	killer = "The Void";
-        else if (playerDamage.getCause() == DamageCause.LAVA && plugin.getConfig().getBoolean("other-events.lava") == true && player.hasPermission("irestore.events.lava"))
+        else if (playerDamage.getCause() == DamageCause.LAVA && plugin.getConfig().getBoolean("other-events.lava") == true && player.hasPermission("pvprestore.events.lava"))
         	killer = "Lava";
-        else if (playerDamage.getCause() == DamageCause.CONTACT && plugin.getConfig().getBoolean("other-events.cactus") == true && player.hasPermission("irestore.events.cactus"))
+        else if (playerDamage.getCause() == DamageCause.CONTACT && plugin.getConfig().getBoolean("other-events.cactus") == true && player.hasPermission("pvprestore.events.cactus"))
         	killer = "A Cactus";
-        else if (playerDamage.getCause() == DamageCause.DROWNING && plugin.getConfig().getBoolean("other-events.drowning") == true && player.hasPermission("irestore.events.drowning"))
+        else if (playerDamage.getCause() == DamageCause.DROWNING && plugin.getConfig().getBoolean("other-events.drowning") == true && player.hasPermission("pvprestore.events.drowning"))
         	killer = "The Water";
-        else if (playerDamage.getCause() == DamageCause.STARVATION && plugin.getConfig().getBoolean("other-events.starvation") == true && player.hasPermission("irestore.events.starvation"))
+        else if (playerDamage.getCause() == DamageCause.STARVATION && plugin.getConfig().getBoolean("other-events.starvation") == true && player.hasPermission("pvprestore.events.starvation"))
         	killer = "Their Lack of Food";
-        else if (playerDamage.getCause() == DamageCause.SUFFOCATION && plugin.getConfig().getBoolean("other-events.suffocation") == true && player.hasPermission("irestore.events.suffocation"))
+        else if (playerDamage.getCause() == DamageCause.SUFFOCATION && plugin.getConfig().getBoolean("other-events.suffocation") == true && player.hasPermission("pvprestore.events.suffocation"))
         	killer = "Their Lack of Air";
-        else if (playerDamage.getCause() == DamageCause.FALL && plugin.getConfig().getBoolean("other-events.falling") == true && player.hasPermission("irestore.events.falling"))
+        else if (playerDamage.getCause() == DamageCause.FALL && plugin.getConfig().getBoolean("other-events.falling") == true && player.hasPermission("pvprestore.events.falling"))
         	killer = "Breaking their legs";
         else if (player.getKiller() != null) 
         	killer = player.getKiller().getName();
@@ -130,13 +130,13 @@ public class iRestorePlayerListener implements Listener {
             return;
         }
 
-        if (player.hasPermission("irestore.keep") && plugin.getConfig().getBoolean("keep-inventory") && plugin.getConfig().getBoolean("keep-xp")) {
+        if (player.hasPermission("pvprestore.keep") && plugin.getConfig().getBoolean("keep-inventory") && plugin.getConfig().getBoolean("keep-xp")) {
             event.setKeepLevel(true);
             if (plugin.getConfig().getInt("xp-to-remove") < 100 && plugin.getConfig().getInt("xp-to-remove") >= 0) {
                 player.setLevel((int) (player.getLevel() * ((100.0 - plugin.getConfig().getInt("xp-to-remove")) / 100.0)));
             }
             player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory and " + (100 - plugin.getConfig().getInt("xp-to-remove")) + "% of your XP has been saved.");
-            if (player.hasPermission("irestore.money.steal") && plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
+            if (player.hasPermission("pvprestore.money.steal") && plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
                 moneySteal(event);
             }
             event.setDroppedExp(0);
@@ -161,13 +161,13 @@ public class iRestorePlayerListener implements Listener {
             	event.getDrops().clear();
             }
         }
-        else if ((player.hasPermission("irestore.keep.xp") || player.hasPermission("irestore.keep")) && plugin.getConfig().getBoolean("keep-xp")) {
-            if (player.hasPermission("irestore.keep.inventory") && plugin.getConfig().getBoolean("keep-inventory")) {
+        else if ((player.hasPermission("pvprestore.keep.xp") || player.hasPermission("pvprestore.keep")) && plugin.getConfig().getBoolean("keep-xp")) {
+            if (player.hasPermission("pvprestore.keep.inventory") && plugin.getConfig().getBoolean("keep-inventory")) {
                 event.setKeepLevel(true);
                 if (plugin.getConfig().getInt("xp-to-remove") < 100 && plugin.getConfig().getInt("xp-to-remove") >= 0) {
                     player.setLevel((int) (player.getLevel() * ((100.0 - plugin.getConfig().getInt("xp-to-remove")) / 100.0)));
                 }
-                if (player.hasPermission("irestore.money.steal") && plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
+                if (player.hasPermission("pvprestore.money.steal") && plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
                     moneySteal(event);
                 }
                 event.setDroppedExp(0);
@@ -197,7 +197,7 @@ public class iRestorePlayerListener implements Listener {
                 if (plugin.getConfig().getInt("xp-to-remove") < 100 && plugin.getConfig().getInt("xp-to-remove") >= 0) {
                     player.setLevel((int) (player.getLevel() * ((100.0 - plugin.getConfig().getInt("xp-to-remove")) / 100.0)));
                 }
-                if (player.hasPermission("irestore.money.steal") && plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
+                if (player.hasPermission("pvprestore.money.steal") && plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
                     moneySteal(event);
                 }
                 player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so " + (100 - plugin.getConfig().getInt("xp-to-remove")) + "% of your XP has been saved.");
@@ -207,13 +207,13 @@ public class iRestorePlayerListener implements Listener {
                 event.setDroppedExp(0);
             }
         }
-        else if ((player.hasPermission("irestore.keep.inventory") || player.hasPermission("irestore.keep")) && plugin.getConfig().getBoolean("keep-inventory")) {
-            if (player.hasPermission("irestore.keep.xp") && plugin.getConfig().getBoolean("keep-xp")) {
+        else if ((player.hasPermission("pvprestore.keep.inventory") || player.hasPermission("pvprestore.keep")) && plugin.getConfig().getBoolean("keep-inventory")) {
+            if (player.hasPermission("pvprestore.keep.xp") && plugin.getConfig().getBoolean("keep-xp")) {
                 event.setKeepLevel(true);
                 if (plugin.getConfig().getInt("xp-to-remove") < 100 && plugin.getConfig().getInt("xp-to-remove") >= 0) {
                     player.setLevel((int) (player.getLevel() * ((100.0 - plugin.getConfig().getInt("xp-to-remove")) / 100.0)));
                 }
-                if (player.hasPermission("irestore.money.steal") && plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
+                if (player.hasPermission("pvprestore.money.steal") && plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
                     moneySteal(event);
                 }
                 player.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "Your death was player related, so your inventory and " + (100 - plugin.getConfig().getInt("xp-to-remove")) + "% of your XP has been saved.");
@@ -244,7 +244,7 @@ public class iRestorePlayerListener implements Listener {
                 if (plugin.getConfig().getBoolean("death-message")) {
                     event.setDeathMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.RED + player.getName() + ChatColor.GREEN + " was killed by " + ChatColor.RED + killer + ChatColor.GREEN + "!");
                 }
-                if (player.hasPermission("irestore.money.steal") && plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
+                if (player.hasPermission("pvprestore.money.steal") && plugin.getConfig().getBoolean("vault.enabled") && killer != null) {
                     moneySteal(event);
                 }
                 ItemStack[] content = player.getInventory().getContents();
@@ -353,13 +353,13 @@ public class iRestorePlayerListener implements Listener {
 	public void moneySteal(PlayerDeathEvent event) {
 		Player p = event.getEntity();
 		Player k = p.getKiller();
-		if (!p.hasPermission("irestore.money.exempt") && iRestore.econ != null && k != null) {
-			double r = iRestore.econ.getBalance(p.getName()) * (plugin.getConfig().getInt("vault.money-to-steal") / 100.0);
-            iRestore.econ.depositPlayer(k.getName(), r);
-            iRestore.econ.withdrawPlayer(p.getName(), r);
+		if (!p.hasPermission("pvprestore.money.exempt") && PvPRestore.econ != null && k != null) {
+			double r = PvPRestore.econ.getBalance(p.getName()) * (plugin.getConfig().getInt("vault.money-to-steal") / 100.0);
+            PvPRestore.econ.depositPlayer(k.getName(), r);
+            PvPRestore.econ.withdrawPlayer(p.getName(), r);
 			DecimalFormat dFormat = new DecimalFormat();
 			String d = dFormat.format(r);
-			k.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "You stole " + ChatColor.RED + d + " " + iRestore.econ.currencyNamePlural() + ChatColor.GREEN + " from " + ChatColor.RED + p.getName());
+			k.sendMessage(ChatColor.YELLOW + "[PVP_Restore] " + ChatColor.GREEN  + "You stole " + ChatColor.RED + d + " " + PvPRestore.econ.currencyNamePlural() + ChatColor.GREEN + " from " + ChatColor.RED + p.getName());
 		}
 	}
 	

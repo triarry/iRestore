@@ -1,10 +1,10 @@
-#Config File for iRestore
+#Config File for PvP Restore
 #A Minecraft/Bukkit plugin made by triarry
 #
 #DO NOT CHANGE THIS LINE
 version: 2.0
 #
-#triarry's github: https://github.com/triarry/iRestore
+#triarry's github: https://github.com/triarry/PvPRestore
 #
 
 death-message: true
@@ -21,7 +21,6 @@ other-events:
     drowning: false
     starvation: false
     suffocation: false
-    falling: false
 # Percentage of XP to remove. Must be between 0 and 99. 0 by default, to remove 0% of XP.
 xp-to-remove: 0
 vault:
