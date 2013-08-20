@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 name: iRestore
 main: com.github.triarry.iRestore.iRestore
 version: 1.4.6
-=======
-name: PvP Restore
-main: com.github.triarry.PvPRestore.PvPRestore
-version: 1.4.7
->>>>>>> b1f49ede88137430d3c961c5de3c11175d84dbb9
 author: triarry
 softdepend: [Vault, MyPet]
 commands:
