@@ -31,14 +31,17 @@ public class iRestore extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		PluginManager pm = getServer().getPluginManager();
+		
 		pm.registerEvents(this.playerListener, this);
 		Utilities.getUtilities().startUp(this);
 	    configFile = new File(getDataFolder(), "config.yml");
+	    
 	    try {
 	        firstRun();
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
+	    
 	    try {
 	        Metrics metrics = new Metrics(this);
 	        metrics.start();
@@ -46,32 +49,45 @@ public class iRestore extends JavaPlugin {
 	    } catch (IOException e) {
 	        // Failed to submit the stats :-(
 	    }
+	    
 	    config = new YamlConfiguration();
 	    loadYamls();
-	    if (getConfig().getDouble("version") != 2.0) {
+	    
+	    if (getConfig().getDouble("version") != 2.1) {
 	    	this.getLogger().info("Your config is out of date. Regenerating...");
             configFile.setWritable(true);
             configFile.renameTo(new File(getDataFolder() + "/old-config.yml"));
 	    	reConfig();
 	    }
+	    
 	    getCommand("irestore").setExecutor(new iRestoreCommandExecutor(this));
-        if (!setupEconomy())
+	    
+        if (!setupEconomy()) {
             this.getLogger().info("No Vault dependency found! (iConomy, BOSEconomy, etc.)");
-        if (getConfig().getBoolean("my-pet-enabled")) {
-            if (!setupMyPet())
-                this.getLogger().info("MyPet not found! Disabling MyPet stuff.");
-            else
-            	this.getLogger().info("iRestore has hooked into MyPet!");
         }
-		if(getConfig().getBoolean("check-for-updates") == true) {
+        
+        if (getConfig().getBoolean("my-pet-enabled")) {
+            if (!setupMyPet()) {
+                this.getLogger().info("MyPet not found! Disabling MyPet stuff.");
+            }
+            
+            else {
+            	this.getLogger().info("iRestore has hooked into MyPet!");
+            }
+        }
+        
+		if(getConfig().getBoolean("check-for-updates")) {
 			Updater updater = new Updater(this, "irestore", this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
 			updater.getResult();
+			
 			if(updater.getResult() == UpdateResult.UPDATE_AVAILABLE) {
 				update = true;
 			}
+			
 			ver = updater.getLatestVersionString();
 		}
-		if (update == true) {
+		
+		if (update) {
 			this.getLogger().info("You have an update waiting for you! (dev.bukkit.org/server-mods/irestore/)");
 		}
 	}
@@ -92,10 +108,13 @@ public class iRestore extends JavaPlugin {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;
         }
+        
         RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        
         if (rsp == null) {
             return false;
         }
+        
         econ = rsp.getProvider();
         return econ != null;
     }
@@ -105,6 +124,7 @@ public class iRestore extends JavaPlugin {
             myPetEnabled = true;
             return true;
         }
+        
         return false;
     }
     

@@ -2,7 +2,7 @@
 #A Minecraft/Bukkit plugin made by triarry
 #
 #DO NOT CHANGE THIS LINE
-version: 2.0
+version: 2.1
 #
 #triarry's github: https://github.com/triarry/iRestore
 #
@@ -12,16 +12,35 @@ keep-inventory: true
 keep-xp: true
 my-pet-enabled: false
 check-for-updates: true
-other-events:
-    tnt: false
-    fire: false
-    void: false
-    lava: false
-    cactus: false
-    drowning: false
-    starvation: false
-    suffocation: false
-    falling: false
+#Choose all of the events you would like to trigger the plugin. False is off, true is on.
+events:
+    other:
+        all: false
+        tnt: false
+        fire: false
+        void: false
+        lava: false
+        cactus: false
+        drowning: false
+        starvation: false
+        suffocation: false
+        falling: false
+    mobs:
+        all: false
+        skeleton: false
+        zombie: false
+        ghast: false
+        witch: false
+        blaze: false
+        wither_skeleton: false
+        wither: false
+        enderdragon: false
+    pvp:
+        all: true
+        melee: false
+        bows: false
+        potions: false
+        tnt: false 
 # Percentage of XP to remove. Must be between 0 and 99. 0 by default, to remove 0% of XP.
 xp-to-remove: 0
 vault:
