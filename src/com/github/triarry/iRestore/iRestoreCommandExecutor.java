@@ -17,7 +17,7 @@ public class iRestoreCommandExecutor implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("irestore")) {
 			sender.sendMessage(ChatColor.LIGHT_PURPLE + "#####");
-			sender.sendMessage(ChatColor.GREEN + "Currently running iRestore version 1.4.6");
+			sender.sendMessage(ChatColor.GREEN + "Currently running iRestore version 1.4.7");
 			sender.sendMessage(ChatColor.GREEN + "Plugin made by triarry");
 			sender.sendMessage(ChatColor.LIGHT_PURPLE + "#####");
 			return true;

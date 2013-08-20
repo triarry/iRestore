@@ -24,7 +24,6 @@ public class iRestore extends JavaPlugin {
     
     public static Economy econ = null;
     public static boolean myPetEnabled = false;
-    public static boolean playerHeadsEnabled = false;
     
     public static boolean update = false;
     public static String ver = "";
