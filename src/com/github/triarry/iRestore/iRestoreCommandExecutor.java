@@ -18,7 +18,11 @@ public class iRestoreCommandExecutor implements CommandExecutor {
 		if (label.equalsIgnoreCase("irestore")) {
 			sender.sendMessage(ChatColor.LIGHT_PURPLE + "#####");
 <<<<<<< HEAD:src/com/github/triarry/iRestore/iRestoreCommandExecutor.java
+<<<<<<< HEAD:src/com/github/triarry/iRestore/iRestoreCommandExecutor.java
 			sender.sendMessage(ChatColor.GREEN + "Currently running iRestore version 1.4.6");
+=======
+			sender.sendMessage(ChatColor.GREEN + "Currently running PvP Restore version 1.4.7");
+>>>>>>> b1f49ede88137430d3c961c5de3c11175d84dbb9:src/com/github/triarry/PvPRestore/PvPRestoreCommandExecutor.java
 =======
 			sender.sendMessage(ChatColor.GREEN + "Currently running PvP Restore version 1.4.7");
 >>>>>>> b1f49ede88137430d3c961c5de3c11175d84dbb9:src/com/github/triarry/PvPRestore/PvPRestoreCommandExecutor.java

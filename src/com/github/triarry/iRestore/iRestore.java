@@ -49,20 +49,20 @@ public class iRestore extends JavaPlugin {
 	    }
 	    config = new YamlConfiguration();
 	    loadYamls();
-	    if (getConfig().getDouble("version") != 2.0) {
+	    if (getConfig().getDouble("version") != 1.9) {
 	    	this.getLogger().info("Your config is out of date. Regenerating...");
             configFile.setWritable(true);
             configFile.renameTo(new File(getDataFolder() + "/old-config.yml"));
 	    	reConfig();
 	    }
-	    getCommand("pvprestore").setExecutor(new iRestoreCommandExecutor(this));
+	    getCommand("irestore").setExecutor(new iRestoreCommandExecutor(this));
         if (!setupEconomy())
             this.getLogger().info("No Vault dependency found! (iConomy, BOSEconomy, etc.)");
         if (getConfig().getBoolean("my-pet-enabled")) {
             if (!setupMyPet())
                 this.getLogger().info("MyPet not found! Disabling MyPet stuff.");
             else
-            	this.getLogger().info("PvPRestore has hooked into MyPet!");
+            	this.getLogger().info("iRestore has hooked into MyPet!");
         }
 		if(getConfig().getBoolean("check-for-updates") == true) {
 			Updater updater = new Updater(this, "irestore", this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
