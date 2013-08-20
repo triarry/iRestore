@@ -8,16 +8,18 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.github.triarry.iRestore.metrics.Metrics;
+import com.github.triarry.iRestore.commands.InfoCommand;
+import com.github.triarry.iRestore.listeners.PlayerListener;
 import com.github.triarry.iRestore.utilities.Updater;
 import com.github.triarry.iRestore.utilities.Utilities;
 import com.github.triarry.iRestore.utilities.Updater.UpdateResult;
+import com.github.triarry.iRestore.utilities.metrics.Metrics;
 
 import java.io.*;
 
 public class iRestore extends JavaPlugin {
 	
-	public final iRestorePlayerListener playerListener = new iRestorePlayerListener(this);
+	public final PlayerListener playerListener = new PlayerListener(this);
 	
     File configFile;
     FileConfiguration config;
@@ -60,7 +62,7 @@ public class iRestore extends JavaPlugin {
 	    	reConfig();
 	    }
 	    
-	    getCommand("irestore").setExecutor(new iRestoreCommandExecutor(this));
+	    getCommand("irestore").setExecutor(new InfoCommand(this));
 	    
         if (!setupEconomy()) {
             this.getLogger().info("No Vault dependency found! (iConomy, BOSEconomy, etc.)");

@@ -1,16 +1,18 @@
-package com.github.triarry.iRestore;
+package com.github.triarry.iRestore.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class iRestoreCommandExecutor implements CommandExecutor {
+import com.github.triarry.iRestore.iRestore;
+
+public class InfoCommand implements CommandExecutor {
 
 	@SuppressWarnings("unused")
 	private iRestore plugin;
 	  
-	public iRestoreCommandExecutor(iRestore plugin){ 
+	public InfoCommand(iRestore plugin){ 
 		this.plugin = plugin; 
 	}
 

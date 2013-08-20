@@ -1,9 +1,10 @@
-package com.github.triarry.iRestore;
+package com.github.triarry.iRestore.listeners;
 
 import de.Keyle.MyPet.entity.types.CraftMyPet;
 import de.Keyle.MyPet.entity.types.MyPet;
 import de.Keyle.MyPet.skill.skills.implementation.ranged.MyPetProjectile;
 
+import com.github.triarry.iRestore.iRestore;
 import com.github.triarry.iRestore.utilities.Utilities;
 
 import org.bukkit.ChatColor;
@@ -39,7 +40,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-public class iRestorePlayerListener implements Listener {
+public class PlayerListener implements Listener {
 	
 	private iRestore plugin;
 	 
@@ -48,7 +49,7 @@ public class iRestorePlayerListener implements Listener {
 	
 	public List<ItemStack> itemsToBeRemoved = new ArrayList<ItemStack>();
 
-    public iRestorePlayerListener(iRestore plugin) {
+    public PlayerListener(iRestore plugin) {
         this.plugin = plugin;
     }
 	
@@ -63,7 +64,7 @@ public class iRestorePlayerListener implements Listener {
 	}
 	
 	@EventHandler
-	public void onPlayerDeath(PlayerDeathEvent event) {
+	public void iRestorePlayerDeath(PlayerDeathEvent event) {
 		FileConfiguration config = plugin.getConfig();
         Player p = event.getEntity();
         String killer;
