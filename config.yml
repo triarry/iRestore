@@ -16,31 +16,45 @@ check-for-updates: true
 events:
     other:
         all: false
-        tnt: false
-        fire: false
-        void: false
-        lava: false
         cactus: false
         drowning: false
+        falling: false
+        fire: false     
+        lava: false 
         starvation: false
         suffocation: false
-        falling: false
+        tnt: false
+        void: false
     mobs:
         all: false
-        skeleton: false
-        zombie: false
-        ghast: false
-        witch: false
+        angry_wolf: false
+        baby_zombie: false
         blaze: false
-        wither_skeleton: false
-        wither: false
+        cave_spider: false
+        creeper: false
         enderdragon: false
+        enderman: false
+        ghast: false
+        giant: false
+        iron_golem: false
+        magma_cube: false
+        silverfish: false
+        skeleton: false
+        slime: false
+        spider: false
+        witch: false
+        wither: false
+        wither_skeleton: false
+        zombie: false
+        zombie_pigman: false
+        zombie_villager: false
     pvp:
         all: true
-        melee: false
         bows: false
+        melee: false
         potions: false
-        tnt: false 
+        tamed_wolf: false
+        tnt: false
 # Percentage of XP to remove. Must be between 0 and 99. 0 by default, to remove 0% of XP.
 xp-to-remove: 0
 vault:
