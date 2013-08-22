@@ -183,6 +183,10 @@ public class PlayerListener implements Listener {
              * Melee mobs
              */
             
+            else if(lastDamageEvent.getDamager() instanceof PigZombie && (config.getBoolean("events.mobs.zombie_pigman") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.zombie_pigman")) {
+            	killer = "Zombie Pigman";
+            }
+            
             else if(lastDamageEvent.getDamager() instanceof Zombie) {
             	Zombie z = (Zombie) lastDamageEvent.getDamager();
             	
@@ -259,10 +263,6 @@ public class PlayerListener implements Listener {
             	killer = "Silverfish";
             }
             
-            else if(lastDamageEvent.getDamager() instanceof PigZombie && (config.getBoolean("events.mobs.zombie_pigman") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.zombie_pigman")) {
-            	killer = "Zombie Pigman";
-            }
-            
             /*
              * TNT
              */
@@ -295,6 +295,10 @@ public class PlayerListener implements Listener {
             
             else if ((pDamage.getCause() == DamageCause.FALL || lastDamageEvent.getDamager() instanceof EnderPearl) && (config.getBoolean("events.other.enderpearl") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.enderpearl")) {
             	killer = "Their own Enderpearl";
+            }
+            
+            else if (pDamage.getCause() == DamageCause.FALLING_BLOCK && (config.getBoolean("events.other.anvil") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.anvil")) {
+            	killer = "An anvil";
             }
             
             /*
@@ -344,10 +348,6 @@ public class PlayerListener implements Listener {
         
         else if (pDamage.getCause() == DamageCause.FALL && (config.getBoolean("events.other.falling") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.falling")) {
         	killer = "Breaking their own legs";
-        }
-        
-        else if (pDamage.getCause() == DamageCause.FALLING_BLOCK && (config.getBoolean("events.other.falling_block") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.falling_block")) {
-        	killer = "A falling block";
         }
         
         else if (pDamage.getCause() == DamageCause.LIGHTNING && (config.getBoolean("events.other.lightning") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.lightning")) {

@@ -31,11 +31,11 @@ permissions:
         description: Allows a player's inventory to be saved by all "other" events.
         default: false
         children:
+            irestore.events.other.anvil: true
             irestore.events.other.cactus: true
             irestore.events.other.drowning: true
             irestore.events.other.enderpearl: true
             irestore.events.other.falling: true
-            irestore.events.other.falling_block: true
             irestore.events.other.fire: true
             irestore.events.other.lava: true
             irestore.events.other.lightning: true
@@ -45,6 +45,8 @@ permissions:
             irestore.events.other.suicide: true
             irestore.events.other.tnt: true
             irestore.events.other.void: true
+    irestore.events.other.anvil:
+        description: Allows a player's inventory to be saved by an anvil
     irestore.events.other.cactus:
         description: Allows a player's inventory to be saved by a cactus death
     irestore.events.other.drowning:
@@ -53,8 +55,6 @@ permissions:
         description: Allows a player's inventory to be saved by enderpearl falling damage
     irestore.events.other.falling:
         description: Allows a player's inventory to be saved by falling damage
-    irestore.events.other.falling_block:
-        description: Allows a player's inventory to be saved by a block falling on their head
     irestore.events.other.fire:
         description: Allows a player's inventory to be saved by a fire death
     irestore.events.other.lava:
