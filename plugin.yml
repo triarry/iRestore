@@ -1,6 +1,6 @@
 name: iRestore
 main: com.github.triarry.iRestore.iRestore
-version: 1.5.0
+version: 1.5.1
 author: triarry
 softdepend: [Vault, MyPet]
 commands:

@@ -55,7 +55,7 @@ public class iRestore extends JavaPlugin {
 	    config = new YamlConfiguration();
 	    loadYamls();
 	    
-	    if (getConfig().getDouble("version") != 2.1) {
+	    if (getConfig().getDouble("version") != 2.2) {
 	    	this.getLogger().info("Your config is out of date. Regenerating...");
             configFile.setWritable(true);
             configFile.renameTo(new File(getDataFolder() + "/old-config.yml"));
