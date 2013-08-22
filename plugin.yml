@@ -33,30 +33,42 @@ permissions:
         children:
             irestore.events.other.cactus: true
             irestore.events.other.drowning: true
+            irestore.events.other.enderpearl: true
             irestore.events.other.falling: true
+            irestore.events.other.falling_block: true
             irestore.events.other.fire: true
             irestore.events.other.lava: true
+            irestore.events.other.lightning: true
             irestore.events.other.magic: true
             irestore.events.other.starvation: true
             irestore.events.other.suffocation: true
+            irestore.events.other.suicide: true
             irestore.events.other.tnt: true
             irestore.events.other.void: true
     irestore.events.other.cactus:
         description: Allows a player's inventory to be saved by a cactus death
     irestore.events.other.drowning:
         description: Allows a player's inventory to be saved by drowning
+    irestore.events.other.enderpearl:
+        description: Allows a player's inventory to be saved by enderpearl falling damage
     irestore.events.other.falling:
         description: Allows a player's inventory to be saved by falling damage
+    irestore.events.other.falling_block:
+        description: Allows a player's inventory to be saved by a block falling on their head
     irestore.events.other.fire:
         description: Allows a player's inventory to be saved by a fire death
     irestore.events.other.lava:
         description: Allows a player's inventory to be saved by a lava death
+    irestore.events.other.lightning:
+        description: Allows a player's inventory to be saved by lightning
     irestore.events.other.magic:
         description: Allows a player's inventory to be saved by a magical death (potion effects)
     irestore.events.other.starvation:
         description: Allows a player's inventory to be saved by starving
     irestore.events.other.suffocation:
         description: Allows a player's inventory to be saved by suffocating
+    irestore.events.other.suicide:
+        description: Allows a player's inventory to be saved by suicide
     irestore.events.other.tnt:
         description: Allows a player's inventory to be saved by a TNT death
     irestore.events.other.void:
@@ -69,6 +81,7 @@ permissions:
             irestore.events.pvp.melee: true
             irestore.events.pvp.potions: true
             irestore.events.pvp.tamed_wolf: true
+            irestore.events.pvp.thorns: true
             irestore.events.pvp.tnt: true
     irestore.events.pvp.bows:
         description: Allows a player's inventory to be saved after getting killed by another player's bow
@@ -78,6 +91,8 @@ permissions:
         description: Allows a player's inventory to be saved after getting killed by another player's potions
     irestore.events.pvp.tamed_wolf:
         description: Allows a player's inventory to be saved by a player's wolf
+    irestore.events.pvp.thorns:
+        description: Allows a player's inventory to be saved after getting killed by the thorns enchantment
     irestore.events.pvp.tnt:
         description: Allows a player's inventory to be saved by a TNT death
     irestore.events.mobs.all:

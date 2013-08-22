@@ -10,19 +10,23 @@ version: 2.1
 death-message: true
 keep-inventory: true
 keep-xp: true
+xp-to-remove: 0
 my-pet-enabled: false
 check-for-updates: true
-#Choose all of the events you would like to trigger the plugin. False is off, true is on.
 events:
     other:
         all: false
         cactus: false
         drowning: false
+        enderpearl: false
         falling: false
-        fire: false     
-        lava: false 
+        falling_block: false
+        fire: false
+        lava: false
+        lightning: false
         starvation: false
         suffocation: false
+        suicide: false
         tnt: false
         void: false
     mobs:
@@ -54,20 +58,16 @@ events:
         melee: false
         potions: false
         tamed_wolf: false
+        thorns: false
         tnt: false
-# Percentage of XP to remove. Must be between 0 and 99. 0 by default, to remove 0% of XP.
-xp-to-remove: 0
 vault:
-    # Vault is required if you enable this.
     enabled: false
-    # Percentage of money to steal from a player on kill. Must be between 0 and 100. 2 by default.
     money-to-steal: 2
-#Do **NOT** have both the blacklist and whitelist on at the same times. Problems will occur!
 blacklist:
     enabled: false
     items:
-    - 266
-    - 298
+    - 144
+    - 397
 whitelist:
     enabled: false
     items:
@@ -75,5 +75,4 @@ whitelist:
     - 300
 percentage-drop:
     enabled: false
-    #Percentage of items to drop. Must be between 0 and 100. 0 by default, to keep 0% of all items
     percentage: 50
