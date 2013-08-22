@@ -58,7 +58,6 @@ events:
         melee: false
         potions: false
         tamed_wolf: false
-        thorns: false
         tnt: false
 vault:
     enabled: false
