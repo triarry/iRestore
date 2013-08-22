@@ -46,55 +46,33 @@ permissions:
             irestore.events.other.tnt: true
             irestore.events.other.void: true
     irestore.events.other.anvil:
-        description: Allows a player's inventory to be saved by an anvil
+        description: Allows a player's inventory to be saved after being killed by an anvil
     irestore.events.other.cactus:
-        description: Allows a player's inventory to be saved by a cactus death
+        description: Allows a player's inventory to be saved after being killed by a cactus
     irestore.events.other.drowning:
-        description: Allows a player's inventory to be saved by drowning
+        description: Allows a player's inventory to be saved after being killed via drowning
     irestore.events.other.enderpearl:
         description: Allows a player's inventory to be saved by enderpearl falling damage
     irestore.events.other.falling:
         description: Allows a player's inventory to be saved by falling damage
     irestore.events.other.fire:
-        description: Allows a player's inventory to be saved by a fire death
+        description: Allows a player's inventory to be saved after being killed by fire
     irestore.events.other.lava:
-        description: Allows a player's inventory to be saved by a lava death
+        description: Allows a player's inventory to be saved after being killed by lava
     irestore.events.other.lightning:
-        description: Allows a player's inventory to be saved by lightning
+        description: Allows a player's inventory to be saved after being killed by lightning
     irestore.events.other.magic:
-        description: Allows a player's inventory to be saved by a magical death (potion effects)
+        description: Allows a player's inventory to be saved after being killed by "magic" (potion effects)
     irestore.events.other.starvation:
-        description: Allows a player's inventory to be saved by starving
+        description: Allows a player's inventory to be saved after being killed by starving
     irestore.events.other.suffocation:
-        description: Allows a player's inventory to be saved by suffocating
+        description: Allows a player's inventory to be saved after being killed by suffocating
     irestore.events.other.suicide:
-        description: Allows a player's inventory to be saved by suicide
+        description: Allows a player's inventory to be saved after being killed by suicide
     irestore.events.other.tnt:
-        description: Allows a player's inventory to be saved by a TNT death
+        description: Allows a player's inventory to be saved after being killed by TNT (non-player related)
     irestore.events.other.void:
-        description: Allows a player's inventory to be saved by a void death
-    irestore.events.pvp.all:
-        description: Allows a player's inventory to be saved by all "pvp related" events.
-        default: false
-        children:
-            irestore.events.pvp.bows: true
-            irestore.events.pvp.melee: true
-            irestore.events.pvp.potions: true
-            irestore.events.pvp.tamed_wolf: true
-            irestore.events.pvp.thorns: true
-            irestore.events.pvp.tnt: true
-    irestore.events.pvp.bows:
-        description: Allows a player's inventory to be saved after getting killed by another player's bow
-    irestore.events.pvp.melee:
-        description: Allows a player's inventory to be saved after getting killed by another player's melee weapon
-    irestore.events.pvp.potions:
-        description: Allows a player's inventory to be saved after getting killed by another player's potions
-    irestore.events.pvp.tamed_wolf:
-        description: Allows a player's inventory to be saved by a player's wolf
-    irestore.events.pvp.thorns:
-        description: Allows a player's inventory to be saved after getting killed by the thorns enchantment
-    irestore.events.pvp.tnt:
-        description: Allows a player's inventory to be saved by a TNT death
+        description: Allows a player's inventory to be saved after being killed by the void
     irestore.events.mobs.all:
         description: Allows a player's inventory to be saved by all mob related events
         default: false
@@ -119,4 +97,68 @@ permissions:
             irestore.events.mobs.wither_skeleton: true
             irestore.events.mobs.zombie: true
             irestore.events.mobs.zombie_pigman: true
-            irestore.events.mobs.zombie_villager: true            
+            irestore.events.mobs.zombie_villager: true
+    irestore.events.mobs.angry_wolf:
+        description: Allows a player's inventory to be saved after being killed by an angry wolf
+    irestore.events.mobs.baby_zombie:
+        description: Allows a player's inventory to be saved after being killed by a baby zombie
+    irestore.events.mobs.blaze:
+        description: Allows a player's inventory to be saved after being killed by a blaze
+    irestore.events.mobs.cave_spider:
+        description: Allows a player's inventory to be saved after being killed by a cave spider
+    irestore.events.mobs.creeper:
+        description: Allows a player's inventory to be saved after being killed by a creeper
+    irestore.events.mobs.enderdragon:
+        description: Allows a player's inventory to be saved after being killed by an enderdragon
+    irestore.events.mobs.enderman:
+        description: Allows a player's inventory to be saved after being killed by an enderman
+    irestore.events.mobs.ghast:
+        description: Allows a player's inventory to be saved after being killed by a ghast
+    irestore.events.mobs.giant:
+        description: Allows a player's inventory to be saved after being killed by a giant
+    irestore.events.mobs.iron_golem:
+        description: Allows a player's inventory to be saved after being killed by an iron golem
+    irestore.events.mobs.magma_cube:
+        description: Allows a player's inventory to be saved after being killed by a magma cube
+    irestore.events.mobs.silverfish:
+        description: Allows a player's inventory to be saved after being killed by a silverfish
+    irestore.events.mobs.skeleton:
+        description: Allows a player's inventory to be saved after being killed by a skeleton
+    irestore.events.mobs.slime:
+        description: Allows a player's inventory to be saved after being killed by a slime
+    irestore.events.mobs.spider:
+        description: Allows a player's inventory to be saved after being killed by a spider
+    irestore.events.mobs.witch:
+        description: Allows a player's inventory to be saved after being killed by a witch
+    irestore.events.mobs.wither:
+        description: Allows a player's inventory to be saved after being killed by a wither
+    irestore.events.mobs.wither_skeleton:
+        description: Allows a player's inventory to be saved after being killed by a wither skeleton
+    irestore.events.mobs.zombie:
+        description: Allows a player's inventory to be saved after being killed by a zombie
+    irestore.events.mobs.zombie_pigman:
+        description: Allows a player's inventory to be saved after being killed by a zombie pigman
+    irestore.events.mobs.zombie_villager:
+        description: Allows a player's inventory to be saved after being killed by a zombie villager
+    irestore.events.pvp.all:
+        description: Allows a player's inventory to be saved by all "pvp related" events.
+        default: false
+        children:
+            irestore.events.pvp.bows: true
+            irestore.events.pvp.melee: true
+            irestore.events.pvp.potions: true
+            irestore.events.pvp.tamed_wolf: true
+            irestore.events.pvp.thorns: true
+            irestore.events.pvp.tnt: true
+    irestore.events.pvp.bows:
+        description: Allows a player's inventory to be saved after getting killed by another player's bow
+    irestore.events.pvp.melee:
+        description: Allows a player's inventory to be saved after getting killed by another player's melee weapon
+    irestore.events.pvp.potions:
+        description: Allows a player's inventory to be saved after getting killed by another player's potions
+    irestore.events.pvp.tamed_wolf:
+        description: Allows a player's inventory to be saved by a player's wolf
+    irestore.events.pvp.thorns:
+        description: Allows a player's inventory to be saved after getting killed by the thorns enchantment
+    irestore.events.pvp.tnt:
+        description: Allows a player's inventory to be saved by a TNT death
