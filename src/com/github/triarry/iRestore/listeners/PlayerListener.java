@@ -174,7 +174,7 @@ public class PlayerListener implements Listener {
              * MyPet
              */
             
-            else if(iRestore.myPetEnabled && (lastDamageEvent.getDamager() instanceof CraftMyPet || lastDamageEvent.getDamager() instanceof MyPetProjectile) && config.getBoolean("my-pet-enabled")) {
+            else if(iRestore.myPetEnabled && (lastDamageEvent.getDamager() instanceof CraftMyPet || lastDamageEvent.getDamager() instanceof MyPetProjectile) && config.getBoolean("my-pet-enabled") && p.hasPermission("irestore.events.pvp.mypet")) {
                 MyPet myPet = ((CraftMyPet) lastDamageEvent.getDamager()).getMyPet();
                 killer = myPet.getOwner().getName() + "'s pet " + myPet.getPetName();
             }
@@ -293,11 +293,11 @@ public class PlayerListener implements Listener {
              * Enderpearls
              */
             
-            else if ((pDamage.getCause() == DamageCause.FALL || lastDamageEvent.getDamager() instanceof EnderPearl) && (config.getBoolean("events.other.enderpearl") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.enderpearl")) {
+            else if ((pDamage.getCause() == DamageCause.FALL || lastDamageEvent.getDamager() instanceof EnderPearl) && (config.getBoolean("events.other.enderpearl") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.other.enderpearl")) {
             	killer = "Their own Enderpearl";
             }
             
-            else if (pDamage.getCause() == DamageCause.FALLING_BLOCK && (config.getBoolean("events.other.anvil") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.anvil")) {
+            else if (pDamage.getCause() == DamageCause.FALLING_BLOCK && (config.getBoolean("events.other.anvil") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.other.anvil")) {
             	killer = "An anvil";
             }
             
@@ -318,47 +318,47 @@ public class PlayerListener implements Listener {
 	    	return;
 	    }
         
-    	else if ((pDamage.getCause() == DamageCause.FIRE || pDamage.getCause() == DamageCause.FIRE_TICK) && (config.getBoolean("events.other.fire") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.fire")) {
+    	else if ((pDamage.getCause() == DamageCause.FIRE || pDamage.getCause() == DamageCause.FIRE_TICK) && (config.getBoolean("events.other.fire") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.other.fire")) {
     		killer = "Fire";
     	}
         
-        else if (pDamage.getCause() == DamageCause.VOID && (config.getBoolean("events.other.void") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.void")) {
+        else if (pDamage.getCause() == DamageCause.VOID && (config.getBoolean("events.other.void") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.other.void")) {
         	killer = "The Void";
         }
         
-        else if (pDamage.getCause() == DamageCause.LAVA && (config.getBoolean("events.other.lava") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.lava")) {
+        else if (pDamage.getCause() == DamageCause.LAVA && (config.getBoolean("events.other.lava") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.other.lava")) {
         	killer = "Lava";
         }
         
-        else if (pDamage.getCause() == DamageCause.CONTACT && (config.getBoolean("events.other.cactus") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.cactus")) {
+        else if (pDamage.getCause() == DamageCause.CONTACT && (config.getBoolean("events.other.cactus") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.other.cactus")) {
         	killer = "A Cactus";
         }
         
-        else if (pDamage.getCause() == DamageCause.DROWNING && (config.getBoolean("events.other.drowning") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.drowning")) {
+        else if (pDamage.getCause() == DamageCause.DROWNING && (config.getBoolean("events.other.drowning") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.other.drowning")) {
         	killer = "Drowning";
         }
         
-        else if (pDamage.getCause() == DamageCause.STARVATION && (config.getBoolean("events.other.starvation") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.starvation")) {
+        else if (pDamage.getCause() == DamageCause.STARVATION && (config.getBoolean("events.other.starvation") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.other.starvation")) {
         	killer = "Their lack of food";
         }
         
-        else if (pDamage.getCause() == DamageCause.SUFFOCATION && (config.getBoolean("events.other.suffocation") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.suffocation")) {
+        else if (pDamage.getCause() == DamageCause.SUFFOCATION && (config.getBoolean("events.other.suffocation") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.other.suffocation")) {
         	killer = "Their lack of air";
         }
         
-        else if (pDamage.getCause() == DamageCause.FALL && (config.getBoolean("events.other.falling") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.falling")) {
+        else if (pDamage.getCause() == DamageCause.FALL && (config.getBoolean("events.other.falling") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.other.falling")) {
         	killer = "Breaking their own legs";
         }
         
-        else if (pDamage.getCause() == DamageCause.LIGHTNING && (config.getBoolean("events.other.lightning") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.lightning")) {
+        else if (pDamage.getCause() == DamageCause.LIGHTNING && (config.getBoolean("events.other.lightning") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.other.lightning")) {
         	killer = "Lightning";
         }
         
-        else if (pDamage.getCause() == DamageCause.SUICIDE && (config.getBoolean("events.other.suicide") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.suicide")) {
+        else if (pDamage.getCause() == DamageCause.SUICIDE && (config.getBoolean("events.other.suicide") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.other.suicide")) {
         	killer = "His/herself";
         }
         
-        else if (pDamage.getCause() == DamageCause.MAGIC && (config.getBoolean("events.other.magic") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.magic")) {
+        else if (pDamage.getCause() == DamageCause.MAGIC && (config.getBoolean("events.other.magic") || config.getBoolean("events.other.all")) && p.hasPermission("irestore.events.other.magic")) {
         	killer = "Magic";
         }
         

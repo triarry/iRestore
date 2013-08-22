@@ -146,6 +146,7 @@ permissions:
         children:
             irestore.events.pvp.bows: true
             irestore.events.pvp.melee: true
+            irestore.events.pvp.mypet: true
             irestore.events.pvp.potions: true
             irestore.events.pvp.tamed_wolf: true
             irestore.events.pvp.tnt: true
@@ -153,6 +154,8 @@ permissions:
         description: Allows a player's inventory to be saved after getting killed by another player's bow
     irestore.events.pvp.melee:
         description: Allows a player's inventory to be saved after getting killed by another player's melee weapon
+    irestore.events.pvp.mypet:
+        description: Allows a player's inventory to be saved after getting killed by another player's MyPet (REQUIRED my-pet-enabled: true)
     irestore.events.pvp.potions:
         description: Allows a player's inventory to be saved after getting killed by another player's potions
     irestore.events.pvp.tamed_wolf:
