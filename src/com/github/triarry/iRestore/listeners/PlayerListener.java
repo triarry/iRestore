@@ -362,10 +362,6 @@ public class PlayerListener implements Listener {
         	killer = "Magic";
         }
         
-        else if (pDamage.getCause() == DamageCause.THORNS && (config.getBoolean("events.pvp.thorns") || config.getBoolean("events.pvp.all")) && p.hasPermission("irestore.pvp.thorns")) {
-        	killer = "Thorns";
-        }
-        
         /*
          * Player was not killed by an enabled event.
          */
