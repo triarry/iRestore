@@ -62,7 +62,7 @@ permissions:
     irestore.events.other.lightning:
         description: Allows a player's inventory to be saved after being killed by lightning
     irestore.events.other.magic:
-        description: Allows a player's inventory to be saved after being killed by "magic" (potion effects)
+        description: Allows a player's inventory to be saved after being killed by "magic"
     irestore.events.other.starvation:
         description: Allows a player's inventory to be saved after being killed by starving
     irestore.events.other.suffocation:
@@ -70,7 +70,7 @@ permissions:
     irestore.events.other.suicide:
         description: Allows a player's inventory to be saved after suiciding
     irestore.events.other.tnt:
-        description: Allows a player's inventory to be saved after being killed by TNT (non-player related)
+        description: Allows a player's inventory to be saved after being killed by TNT
     irestore.events.other.void:
         description: Allows a player's inventory to be saved after being killed by the void
     irestore.events.mobs.all:
@@ -155,10 +155,10 @@ permissions:
     irestore.events.pvp.melee:
         description: Allows a player's inventory to be saved after getting killed by another player's melee weapon
     irestore.events.pvp.mypet:
-        description: Allows a player's inventory to be saved after getting killed by another player's MyPet (REQUIRED my-pet-enabled: true)
+        description: Allows a player's inventory to be saved after getting killed by another player's MyPet
     irestore.events.pvp.potions:
         description: Allows a player's inventory to be saved after getting killed by another player's potions
     irestore.events.pvp.tamed_wolf:
         description: Allows a player's inventory to be saved after getting killed by another player's wolf
     irestore.events.pvp.tnt:
-        description: Allows a player's inventory to be saved after being killed by TNT (player related, i.e Flint and Steel)
+        description: Allows a player's inventory to be saved after being killed by TNT
