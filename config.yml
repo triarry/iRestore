@@ -12,6 +12,7 @@ keep-inventory: true
 keep-xp: true
 xp-to-remove: 0
 my-pet-enabled: false
+heroes-enabled: false
 check-for-updates: true
 events:
     other:
@@ -59,6 +60,7 @@ events:
         potions: false
         tamed_wolf: false
         tnt: false
+        skills: false
 vault:
     enabled: false
     money-to-steal: 2

@@ -26,6 +26,7 @@ public class iRestore extends JavaPlugin {
     
     public static Economy econ = null;
     public static boolean myPetEnabled = false;
+    public static boolean HeroesEnabled = false;
     
     public static boolean update = false;
     public static String ver = "";
@@ -78,6 +79,16 @@ public class iRestore extends JavaPlugin {
             }
         }
         
+        if (getConfig().getBoolean("heroes-enabled")) {
+            if (!setupHeroes()) {
+                this.getLogger().info("Heroes not found! Disabling Heroes stuff.");
+            }
+            
+            else {
+            	this.getLogger().info("iRestore has hooked into Heroes!");
+            }
+        }
+        
 		if(getConfig().getBoolean("check-for-updates")) {
 			Updater updater = new Updater(this, "irestore", this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
 			updater.getResult();
@@ -124,6 +135,15 @@ public class iRestore extends JavaPlugin {
     private boolean setupMyPet() {
         if (getServer().getPluginManager().isPluginEnabled("MyPet")) {
             myPetEnabled = true;
+            return true;
+        }
+        
+        return false;
+    }
+    
+    private boolean setupHeroes() {
+        if (getServer().getPluginManager().isPluginEnabled("Heroes")) {
+            HeroesEnabled = true;
             return true;
         }
         

@@ -2,7 +2,7 @@ name: iRestore
 main: com.github.triarry.iRestore.iRestore
 version: 1.5.2
 author: triarry
-softdepend: [Vault, MyPet]
+softdepend: [Vault, MyPet, Heroes]
 commands:
     irestore:
         description: Tells the player information about this plugin.
