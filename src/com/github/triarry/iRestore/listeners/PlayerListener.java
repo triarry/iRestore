@@ -6,7 +6,6 @@ import de.Keyle.MyPet.skill.skills.implementation.ranged.MyPetProjectile;
 
 import com.github.triarry.iRestore.iRestore;
 import com.github.triarry.iRestore.utilities.Utilities;
-import com.herocraftonline.heroes.characters.skill.Skill;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -82,8 +81,6 @@ public class PlayerListener implements Listener {
         Player p = event.getEntity();
         String killer;
         EntityDamageEvent pDamage = event.getEntity().getLastDamageCause();
-        org.bukkit.entity.Entity attacker;
-        Skill skill;
         
         if(p.getLastDamageCause() instanceof EntityDamageByEntityEvent) {
             EntityDamageByEntityEvent lastDamageEvent = (EntityDamageByEntityEvent) p.getLastDamageCause();
@@ -157,19 +154,27 @@ public class PlayerListener implements Listener {
              */
             
             else if(lastDamageEvent.getCause() == DamageCause.MAGIC) {
-            	ThrownPotion a = (ThrownPotion) lastDamageEvent.getDamager();
-            	
-            	if(a.getShooter() instanceof Witch && (config.getBoolean("events.mobs.witch") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.witch")) {
-            		killer = "Witch";
-            	}
-            	
-            	else if(a.getShooter() instanceof Player && (config.getBoolean("events.pvp.potions") || config.getBoolean("events.pvp.all")) && p.hasPermission("irestore.events.pvp.potion")) {
-            		Player s = (Player) a.getShooter();
-            		killer = s.getName();
-            	}
-            	
-            	else {
-            		return;
+            	try {
+                	ThrownPotion a = (ThrownPotion) lastDamageEvent.getDamager();
+                	
+                	if(a.getShooter() instanceof Witch && (config.getBoolean("events.mobs.witch") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.witch")) {
+                		killer = "Witch";
+                	}
+                	
+                	else if(a.getShooter() instanceof Player && (config.getBoolean("events.pvp.potions") || config.getBoolean("events.pvp.all")) && p.hasPermission("irestore.events.pvp.potion")) {
+                		Player s = (Player) a.getShooter();
+                		killer = s.getName();
+                	}
+                	else {
+                		return;
+                	}
+            	} catch (ClassCastException e) {
+            		if ((config.getBoolean("events.pvp.skills") || config.getBoolean("events.pvp.all")) && p.hasPermission("irestore.events.pvp.potion")) {
+                		killer = p.getDisplayName() + "'s skill";
+            		} 
+            		else {
+            			return;
+            		}
             	}
             }
             
@@ -290,11 +295,6 @@ public class PlayerListener implements Listener {
             
             else if ((p.getKiller() != null || lastDamageEvent.getDamager() instanceof Player) && (config.getBoolean("events.pvp.melee") || config.getBoolean("events.pvp.all")) && p.hasPermission("irestore.events.pvp.melee")) { 
             	killer = p.getKiller().getName();
-            }
-            
-            
-            else if (lastDamageEvent.getAttacker() == skill && (config.getBoolean("events.pvp.skillHeroes") || config.getBoolean("events.pvp.all")) && p.hasPermission("irestore.events.other.skillHeroes")) {
-            	killer = p.getKiller().getName() + "'s skill";
             }
             
             /*
@@ -548,6 +548,7 @@ public class PlayerListener implements Listener {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void dropBlacklist(PlayerDeathEvent event) {
 		FileConfiguration config = plugin.getConfig();
 		Player p = event.getEntity();
@@ -563,6 +564,7 @@ public class PlayerListener implements Listener {
 		event.getDrops().clear();
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void dropWhitelist(PlayerDeathEvent event) {
 		FileConfiguration config = plugin.getConfig();
 		
