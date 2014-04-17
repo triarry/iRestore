@@ -59,6 +59,7 @@ events:
         potions: false
         tamed_wolf: false
         tnt: false
+        skills: false
 vault:
     enabled: false
     money-to-steal: 2

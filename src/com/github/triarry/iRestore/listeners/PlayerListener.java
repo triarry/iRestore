@@ -154,19 +154,27 @@ public class PlayerListener implements Listener {
              */
             
             else if(lastDamageEvent.getCause() == DamageCause.MAGIC) {
-            	ThrownPotion a = (ThrownPotion) lastDamageEvent.getDamager();
-            	
-            	if(a.getShooter() instanceof Witch && (config.getBoolean("events.mobs.witch") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.witch")) {
-            		killer = "Witch";
-            	}
-            	
-            	else if(a.getShooter() instanceof Player && (config.getBoolean("events.pvp.potions") || config.getBoolean("events.pvp.all")) && p.hasPermission("irestore.events.pvp.potion")) {
-            		Player s = (Player) a.getShooter();
-            		killer = s.getName();
-            	}
-            	
-            	else {
-            		return;
+            	try {
+                	ThrownPotion a = (ThrownPotion) lastDamageEvent.getDamager();
+                	
+                	if(a.getShooter() instanceof Witch && (config.getBoolean("events.mobs.witch") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.witch")) {
+                		killer = "Witch";
+                	}
+                	
+                	else if(a.getShooter() instanceof Player && (config.getBoolean("events.pvp.potions") || config.getBoolean("events.pvp.all")) && p.hasPermission("irestore.events.pvp.potion")) {
+                		Player s = (Player) a.getShooter();
+                		killer = s.getName();
+                	}
+                	else {
+                		return;
+                	}
+            	} catch (ClassCastException e) {
+            		if ((config.getBoolean("events.pvp.skills") || config.getBoolean("events.pvp.all")) && p.hasPermission("irestore.events.pvp.potion")) {
+                		killer = p.getDisplayName() + "'s skill";
+            		} 
+            		else {
+            			return;
+            		}
             	}
             }
             
@@ -540,6 +548,7 @@ public class PlayerListener implements Listener {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void dropBlacklist(PlayerDeathEvent event) {
 		FileConfiguration config = plugin.getConfig();
 		Player p = event.getEntity();
@@ -555,6 +564,7 @@ public class PlayerListener implements Listener {
 		event.getDrops().clear();
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void dropWhitelist(PlayerDeathEvent event) {
 		FileConfiguration config = plugin.getConfig();
 		

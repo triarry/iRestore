@@ -20,6 +20,7 @@ public class Utilities {
         plugin = plug;
     }
     
+	@SuppressWarnings("deprecation")
 	public void blacklistItems(Player p) {
 		if (plugin.getConfig().getBoolean("blacklist.enabled") == true) {
 			for (Integer itemList : plugin.getConfig().getIntegerList("blacklist.items")) {
@@ -52,6 +53,7 @@ public class Utilities {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void whitelistItems(Player p) {
 		Boolean itemCheck = false;
 		
@@ -78,6 +80,7 @@ public class Utilities {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void whitelistArmor(Player p) {
 		Boolean helmetCheck = false;
 		Boolean chestplateCheck = false;
