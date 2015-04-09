@@ -19,7 +19,7 @@ public class InfoCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("irestore")) {
 			sender.sendMessage(ChatColor.LIGHT_PURPLE + "#####");
-			sender.sendMessage(ChatColor.GREEN + "Currently running iRestore version 1.5.2");
+			sender.sendMessage(ChatColor.GREEN + "Currently running iRestore version 1.6");
 			sender.sendMessage(ChatColor.GREEN + "Plugin made by triarry");
 			sender.sendMessage(ChatColor.LIGHT_PURPLE + "#####");
 			return true;

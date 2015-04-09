@@ -38,9 +38,12 @@ events:
         creeper: false
         enderdragon: false
         enderman: false
+        endermite: false
         ghast: false
         giant: false
+        guardian: false
         iron_golem: false
+        killer_rabbit: false
         magma_cube: false
         silverfish: false
         skeleton: false

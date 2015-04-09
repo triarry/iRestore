@@ -84,9 +84,12 @@ permissions:
             irestore.events.mobs.creeper: true
             irestore.events.mobs.enderdragon: true
             irestore.events.mobs.enderman: true
+            irestore.events.mobs.endermite: true
             irestore.events.mobs.ghast: true
             irestore.events.mobs.giant: true
+            irestore.events.mobs.guardian: true
             irestore.events.mobs.iron_golem: true
+            irestore.events.mobs.killer_rabbit: true
             irestore.events.mobs.magma_cube: true
             irestore.events.mobs.silverfish: true
             irestore.events.mobs.skeleton: true
@@ -116,6 +119,8 @@ permissions:
         description: Allows a player's inventory to be saved after being killed by a ghast
     irestore.events.mobs.giant:
         description: Allows a player's inventory to be saved after being killed by a giant
+    irestore.events.mobs.guardian:
+        description: Allows a player's inventory to be saved after being killed by a guardian
     irestore.events.mobs.iron_golem:
         description: Allows a player's inventory to be saved after being killed by an iron golem
     irestore.events.mobs.magma_cube:

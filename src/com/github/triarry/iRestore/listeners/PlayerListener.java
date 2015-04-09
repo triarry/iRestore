@@ -109,11 +109,11 @@ public class PlayerListener implements Listener {
             		Skeleton s = (Skeleton) a.getShooter();
             	
             		if(s.getSkeletonType() == SkeletonType.NORMAL && (config.getBoolean("events.mobs.skeleton") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.skeleton")) {
-            			killer = "Skeleton";
+            			killer = "A Skeleton";
             		}
             		
             		else if(s.getSkeletonType() == SkeletonType.WITHER && (config.getBoolean("events.mobs.wither_skeleton") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.wither_skeleton")) {
-            			killer = "Wither Skeleton";
+            			killer = "A Wither Skeleton";
             		}
             		
             		else {
@@ -122,19 +122,19 @@ public class PlayerListener implements Listener {
             	}
             	
             	else if(a.getShooter() instanceof Ghast && (config.getBoolean("events.mobs.ghast") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.ghast")) {
-            		killer = "Ghast";
+            		killer = "A Ghast";
             	}
             	
             	else if(a.getShooter() instanceof Blaze && (config.getBoolean("events.mobs.blaze") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.blaze")) {
-            		killer = "Blaze";
+            		killer = "A Blaze";
             	}
             	
             	else if(a.getShooter() instanceof Wither && (config.getBoolean("events.mobs.wither") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.wither")) {
-            		killer = "Wither";
+            		killer = "A Wither";
             	}
             	
             	else if(a.getShooter() instanceof EnderDragon && (config.getBoolean("events.mobs.enderdragon") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.enderdragon")) {
-            		killer = "Enderdragon";
+            		killer = "An Enderdragon";
             	}
             	
             	else if(iRestore.myPetEnabled && config.getBoolean("my-pet-enabled")) {
@@ -162,7 +162,7 @@ public class PlayerListener implements Listener {
                 	ThrownPotion a = (ThrownPotion) lastDamageEvent.getDamager();
                 	
                 	if(a.getShooter() instanceof Witch && (config.getBoolean("events.mobs.witch") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.witch")) {
-                		killer = "Witch";
+                		killer = "A Witch";
                 	}
                 	
                 	else if(a.getShooter() instanceof Player && (config.getBoolean("events.pvp.potions") || config.getBoolean("events.pvp.all")) && p.hasPermission("irestore.events.pvp.potion")) {
@@ -196,22 +196,22 @@ public class PlayerListener implements Listener {
              */
             
             else if(lastDamageEvent.getDamager() instanceof PigZombie && (config.getBoolean("events.mobs.zombie_pigman") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.zombie_pigman")) {
-            	killer = "Zombie Pigman";
+            	killer = "A Zombie Pigman";
             }
             
             else if(lastDamageEvent.getDamager() instanceof Zombie) {
             	Zombie z = (Zombie) lastDamageEvent.getDamager();
             	
             	if(z.isVillager()  && (config.getBoolean("events.mobs.zombie_villager") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.zombie_villager")) {
-            		killer = "Zombie Villager";
+            		killer = "A Zombie Villager";
             	}
             	
             	else if(z.isBaby() && (config.getBoolean("events.mobs.baby_zombie") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.baby_zombie")) {
-            		killer = "Baby Zombie";
+            		killer = "A Baby Zombie";
             	}
             	
             	else if((config.getBoolean("events.mobs.zombie") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.zombie")) {
-            		killer = "Zombie";
+            		killer = "A Zombie";
             	}
             	
             	else {
@@ -220,26 +220,26 @@ public class PlayerListener implements Listener {
             }
             
             else if(lastDamageEvent.getDamager() instanceof Guardian && (config.getBoolean("events.mobs.guardian") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.guardian")) {
-            	killer = "Guardian";
+            	killer = "A Guardian";
             }
             
             else if(lastDamageEvent.getDamager() instanceof Endermite && (config.getBoolean("events.mobs.endermite") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.endermite")) {
-            	killer = "Endermite";
+            	killer = "An Endermite";
             }
             
             else if(lastDamageEvent.getDamager() instanceof Blaze && (config.getBoolean("events.mobs.blaze") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.blaze")) {
-            	killer = "Blaze";
+            	killer = "A Blaze";
             }
             
             else if(lastDamageEvent.getDamager() instanceof Giant && (config.getBoolean("events.mobs.giant") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.giant")) {
-            	killer = "Giant";
+            	killer = "A Giant";
             }
             
             else if(lastDamageEvent.getDamager() instanceof Rabbit) {
         		Rabbit r = (Rabbit) lastDamageEvent.getDamager();
             	
         		if(r.getRabbitType() == Rabbit.Type.THE_KILLER_BUNNY && (config.getBoolean("events.mobs.killer_rabbit") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.killer_rabbit")) {
-        			killer = "Killer Rabbit";
+        			killer = "The Killer Rabbit";
         		}
         		else {
         			return;
@@ -250,7 +250,7 @@ public class PlayerListener implements Listener {
         		Wolf w = (Wolf) lastDamageEvent.getDamager();
             	
         		if(w.isAngry() && (config.getBoolean("events.mobs.angry_wolf") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.angry_wolf")) {
-        			killer = "Angry Wolf";
+        			killer = "An Angry Wolf";
         		}
         		
         		else if(w.isTamed() && (config.getBoolean("events.pvp.tamed_wolf") || config.getBoolean("events.pvp.all")) && p.hasPermission("irestore.events.pvp.tamed_wolf")) {
@@ -263,35 +263,35 @@ public class PlayerListener implements Listener {
             }
             
             else if(lastDamageEvent.getDamager() instanceof Spider && (config.getBoolean("events.mobs.spider") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.spider")) {
-            	killer = "Spider";
+            	killer = "A Spider";
             }
             
             else if(lastDamageEvent.getDamager() instanceof CaveSpider && (config.getBoolean("events.mobs.cave_spider") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.cave_spider")) {
-            	killer = "Cave Spider";
+            	killer = "A Cave Spider";
             }
             
             else if(lastDamageEvent.getDamager() instanceof Creeper && (config.getBoolean("events.mobs.creeper") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.creeper")) {
-            	killer = "Creeper";
+            	killer = "A Creeper";
             }
             
             else if(lastDamageEvent.getDamager() instanceof Enderman && (config.getBoolean("events.mobs.enderman") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.enderman")) {
-            	killer = "Enderman";
+            	killer = "An Enderman";
             }
             
             else if(lastDamageEvent.getDamager() instanceof IronGolem && (config.getBoolean("events.mobs.iron_golem") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.iron_golem")) {
-            	killer = "Iron Golem";
+            	killer = "An Iron Golem";
             }
             
             else if(lastDamageEvent.getDamager() instanceof MagmaCube && (config.getBoolean("events.mobs.magma_cube") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.magma_cube")) {
-            	killer = "Magma Cube";
+            	killer = "A Magma Cube";
             }
             
             else if(lastDamageEvent.getDamager() instanceof Slime && (config.getBoolean("events.mobs.slime") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.slime")) {
-            	killer = "Slime";
+            	killer = "A Slime";
             }
             
             else if(lastDamageEvent.getDamager() instanceof Silverfish && (config.getBoolean("events.mobs.silverfish") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.silverfish")) {
-            	killer = "Silverfish";
+            	killer = "A Silverfish";
             }
             
             /*
@@ -552,6 +552,7 @@ public class PlayerListener implements Listener {
         }
     }
 
+	@SuppressWarnings("deprecation")
 	public void moneySteal(PlayerDeathEvent event) {
 		FileConfiguration config = plugin.getConfig();
 		
