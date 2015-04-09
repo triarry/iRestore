@@ -15,13 +15,17 @@ import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Enderman;
+import org.bukkit.entity.Endermite;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Giant;
+import org.bukkit.entity.Guardian;
 import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.MagmaCube;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.entity.Rabbit;
 import org.bukkit.entity.Silverfish;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Skeleton.SkeletonType;
@@ -215,12 +219,31 @@ public class PlayerListener implements Listener {
             	}
             }
             
+            else if(lastDamageEvent.getDamager() instanceof Guardian && (config.getBoolean("events.mobs.guardian") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.guardian")) {
+            	killer = "Guardian";
+            }
+            
+            else if(lastDamageEvent.getDamager() instanceof Endermite && (config.getBoolean("events.mobs.endermite") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.endermite")) {
+            	killer = "Endermite";
+            }
+            
             else if(lastDamageEvent.getDamager() instanceof Blaze && (config.getBoolean("events.mobs.blaze") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.blaze")) {
             	killer = "Blaze";
             }
             
             else if(lastDamageEvent.getDamager() instanceof Giant && (config.getBoolean("events.mobs.giant") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.giant")) {
             	killer = "Giant";
+            }
+            
+            else if(lastDamageEvent.getDamager() instanceof Rabbit) {
+        		Rabbit r = (Rabbit) lastDamageEvent.getDamager();
+            	
+        		if(r.getRabbitType() == Rabbit.Type.THE_KILLER_BUNNY && (config.getBoolean("events.mobs.killer_rabbit") || config.getBoolean("events.mobs.all")) && p.hasPermission("irestore.events.mobs.killer_rabbit")) {
+        			killer = "Killer Rabbit";
+        		}
+        		else {
+        			return;
+        		}
             }
             
             else if(lastDamageEvent.getDamager() instanceof Wolf) {
