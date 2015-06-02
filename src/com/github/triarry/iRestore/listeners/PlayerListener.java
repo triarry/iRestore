@@ -1,11 +1,10 @@
 package com.github.triarry.iRestore.listeners;
 
-import de.Keyle.MyPet.entity.types.CraftMyPet;
-import de.Keyle.MyPet.entity.types.MyPet;
-import de.Keyle.MyPet.skill.skills.implementation.ranged.MyPetProjectile;
-
-import com.github.triarry.iRestore.iRestore;
-import com.github.triarry.iRestore.utilities.Utilities;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -21,7 +20,6 @@ import org.bukkit.entity.Giant;
 import org.bukkit.entity.Guardian;
 import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.MagmaCube;
-import org.bukkit.entity.Monster;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -50,11 +48,12 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import com.github.triarry.iRestore.iRestore;
+import com.github.triarry.iRestore.utilities.Utilities;
+
+import de.Keyle.MyPet.entity.types.CraftMyPet;
+import de.Keyle.MyPet.entity.types.MyPet;
+import de.Keyle.MyPet.skill.skills.implementation.ranged.MyPetProjectile;
 
 public class PlayerListener implements Listener {
 	
